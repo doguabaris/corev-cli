@@ -15,6 +15,14 @@ A minimal CLI tool to **pull, push, diff, and list configuration files** for pro
 
 ---
 
+### Installation
+
+```bash
+npm install -g cfgctl
+```
+
+---
+
 ### Filename format
 
 All configuration files must follow this naming convention:
@@ -44,16 +52,6 @@ All configuration files are expected to follow this structure:
   }
 }
 ```
-
-### Installation
-
-```bash
-git clone https://github.com/doguabaris/cfgctl.git
-cd cfgctl
-npm install
-```
-
----
 
 ### Usage
 
