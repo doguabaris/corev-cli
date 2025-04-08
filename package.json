@@ -1,6 +1,5 @@
 {
 	"name": "cfgctl",
-	"version": "v0.1.0-alpha.1",
 	"description": "A minimal CLI tool to version, pull, push, diff, and list configuration files.",
 	"main": "dist/index.js",
 	"type": "commonjs",
