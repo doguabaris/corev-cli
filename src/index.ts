@@ -1,4 +1,4 @@
-#!/usr/bin/env ts-node
+#!/usr/bin/env node
 /**
  * @file index.ts
  * @description Entry point for the cfgctl CLI tool.

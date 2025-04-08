@@ -7,13 +7,6 @@
 	"bin": {
 		"cfgctl": "dist/index.js"
 	},
-	"scripts": {
-		"build": "npx tsc",
-		"start": "node dist/index.js",
-		"test": "vitest run",
-		"lint": "eslint . --ext .ts",
-		"lint:fix": "eslint . --ext .ts --fix"
-	},
 	"keywords": [
 		"cli",
 		"config",
@@ -27,6 +20,13 @@
 		"url": "https://doguabaris.bio"
 	},
 	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/doguabaris/cfgctl.git"
+	},
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com"
+	},
 	"dependencies": {
 		"axios": "^1.8.4",
 		"body-parser": "^2.2.0",
@@ -48,5 +48,12 @@
 		"tsx": "^4.19.3",
 		"typescript-eslint": "^8.29.1",
 		"vitest": "^3.1.1"
+	},
+	"scripts": {
+		"build": "npx tsc",
+		"start": "node dist/index.js",
+		"test": "vitest run",
+		"lint": "eslint . --ext .ts",
+		"lint:fix": "eslint . --ext .ts --fix"
 	}
 }
