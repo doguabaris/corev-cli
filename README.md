@@ -1,6 +1,8 @@
-## `cfgctl`
+# CFGCTL-CLI
 
-A minimal CLI tool to **pull, push, diff, and list configuration files** for projects and distributed environments. Designed for managing configurations across a variety of domains where settings need to be easily manageable, versioned, and traceable.
+A minimal CLI tool to **pull, push, diff, and list configuration files** for projects and
+distributed environments. Designed for managing configurations across a variety of domains where
+settings need to be easily manageable, versioned, and traceable.
 
 ---
 
@@ -45,15 +47,15 @@ All configuration files are expected to follow this structure:
 
 ```json
 {
-  "version": "1.0.0",
-  "config": {
-    "key": "value",
-    "...": "..."
-  }
+	"version": "1.0.0",
+	"config": {
+		"key": "value",
+		"...": "..."
+	}
 }
 ```
 
-### Usage
+### Quick Start
 
 #### 1. Initialize once:
 
@@ -76,6 +78,7 @@ Example:
 ```bash
 npx cfgctl pull atlas
 ```
+
 ---
 
 #### 3. Push local config file:
@@ -116,9 +119,10 @@ Then run CLI commands while targeting `http://localhost:3000`.
 
 ### Requirements
 
-- Node.js ≥ 18
+- Node.js ≥ 20.18.1
 - TypeScript
-- API endpoint that serves configs at `/configs/:project/latest` and accepts POSTs at `/configs/:project`
+- API endpoint that serves configs at `/configs/:project/latest` and accepts POSTs at
+  `/configs/:project`
 
 ---
 
