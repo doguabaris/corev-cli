@@ -55,6 +55,8 @@ All configuration files are expected to follow this structure:
 }
 ```
 
+---
+
 ### Quick Start
 
 #### 1. Initialize once:
@@ -64,8 +66,6 @@ npx cfgctl init --api http://localhost:3000
 ```
 
 This saves your API endpoint to `configs/.cfgctlrc.json`.
-
----
 
 #### 2. Pull latest config for a project:
 
@@ -79,23 +79,17 @@ Example:
 npx cfgctl pull atlas
 ```
 
----
-
 #### 3. Push local config file:
 
 ```bash
 npx cfgctl push configs/atlas@1.0.1.json
 ```
 
----
-
 #### 4. Diff two config files:
 
 ```bash
 npx cfgctl diff configs/atlas@1.0.0.json configs/atlas@1.0.1.json
 ```
-
----
 
 #### 5. List versions (based on filenames):
 
