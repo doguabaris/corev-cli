@@ -1,6 +1,7 @@
 {
 	"name": "cfgctl",
 	"description": "A minimal CLI tool to version, pull, push, diff, and list configuration files.",
+	"version": "v0.1.0-alpha.2",
 	"main": "dist/index.js",
 	"type": "commonjs",
 	"bin": {
@@ -54,6 +55,5 @@
 		"test": "vitest run",
 		"lint": "eslint . --ext .ts",
 		"lint:fix": "eslint . --ext .ts --fix"
-	},
-	"version": ""
+	}
 }
