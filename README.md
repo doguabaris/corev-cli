@@ -1,7 +1,4 @@
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/41ffc4db-a3de-4c5f-930b-cfd880df743e" alt="Corev CLI header" width="100%" align="center" />
-</p>
-
+<img src="https://github.com/user-attachments/assets/41ffc4db-a3de-4c5f-930b-cfd880df743e" alt="Corev CLI header" width="100%" />
 
 # Corev-CLI
 
@@ -25,9 +22,7 @@ A minimal CLI tool for managing versioned configuration repositories. Built to p
 npm i -g @corev/cli
 ```
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/805fd64f-9231-4309-a18f-d729e3be897d" alt="Corev CLI header" width="100%" align="center" />
-</p>
+<img src="https://github.com/user-attachments/assets/805fd64f-9231-4309-a18f-d729e3be897d" alt="Corev CLI header" width="100%" />
 
 ---
 
