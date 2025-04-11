@@ -1,5 +1,5 @@
 {
-	"name": "@cono/cli",
+	"name": "@abaris/cono",
 	"description": "A minimal CLI tool to version, pull, push, diff, and list configuration files.",
 	"version": "0.1.0",
 	"main": "dist/index.js",
