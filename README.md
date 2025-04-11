@@ -1,4 +1,4 @@
-# Cono-CLI
+# Corev-CLI
 
 A minimal CLI tool for managing versioned configuration repositories. Built to pull, push, diff, and list config files across distributed environments. Ideal for systems where settings must be easily maintainable, versioned, and auditable.
 
