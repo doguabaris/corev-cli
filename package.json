@@ -1,7 +1,7 @@
 {
 	"name": "@corev/cli",
 	"description": "A minimal CLI for managing versioned configuration repositories.",
-	"version": "0.1.0-alpha.1",
+	"version": "0.1.0-alpha.2",
 	"main": "dist/index.js",
 	"type": "commonjs",
 	"bin": {
