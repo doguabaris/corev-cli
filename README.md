@@ -1,4 +1,6 @@
-![Image](https://github.com/user-attachments/assets/6ee98eda-e25b-464c-9176-1a398c4216c3)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/a1a12d8e-08a9-49b8-9f89-f3b693b623b3" alt="Corev CLI header" width="60%" align="center" />
+</p>
 
 ---
 
