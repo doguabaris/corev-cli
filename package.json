@@ -22,12 +22,12 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/doguabaris/corev-cli-cli.git"
+		"url": "git+https://github.com/doguabaris/corev-cli.git"
 	},
 	"bugs": {
-		"url": "https://github.com/doguabaris/corev-cli-cli/issues"
+		"url": "https://github.com/doguabaris/corev-cli/issues"
 	},
-	"homepage": "https://github.com/doguabaris/corev-cli-cli#readme",
+	"homepage": "https://github.com/doguabaris/corev-cli#readme",
 	"dependencies": {
 		"axios": "^1.8.4",
 		"body-parser": "^2.2.0",

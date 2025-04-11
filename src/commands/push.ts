@@ -7,7 +7,7 @@
  * specified file, parses it as JSON, and makes a POST request to the remote API endpoint.
  *
  * The remote API endpoint is determined by the API base URL stored in the local configuration
- * file (".conorc.json"), which is created via the “init” command. The payload sent to the API
+ * file (".corevrc.json"), which is created via the “init” command. The payload sent to the API
  * should include the version and configuration data.
  *
  * Usage:

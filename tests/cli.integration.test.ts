@@ -5,7 +5,7 @@
  * This file contains integration tests for corev, a command line tool for managing
  * versioned configuration files across projects and environments. The tests verify that:
  *
- *  — The “init” command correctly creates the local configuration file (.conorc.json)
+ *  — The “init” command correctly creates the local configuration file (.corevrc.json)
  *    with the API base URL.
  *  — The “pull” command retrieves the latest configuration from the remote API and saves
  *    it locally in the expected format (e.g., atlas@1.0.0.json).
@@ -37,7 +37,7 @@ import http from 'http';
 const exec = promisify(execCb);
 const cliPath = path.resolve('src/index.ts');
 const configDir = path.resolve('configs');
-const rcFile = path.join(configDir, '.conorc.json');
+const rcFile = path.join(configDir, '.corevrc.json');
 const pulledConfig = path.join(configDir, 'atlas@1.0.0.json');
 const pushedConfig = path.join(configDir, 'atlas@1.0.1.json');
 
@@ -66,7 +66,7 @@ afterAll(() => {
 });
 
 describe('corev CLI integration', () => {
-	it('should init and create .conorc.json', async () => {
+	it('should init and create .corevrc.json', async () => {
 		const {stdout, stderr} = await exec(`ts-node ${cliPath} init --api http://localhost:3000`);
 		const combined = stripAnsi(stdout + stderr);
 		expect(combined).toContain('API base URL saved as:');

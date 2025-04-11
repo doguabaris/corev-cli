@@ -3,11 +3,11 @@
  * @file index.ts
  * @description Entry point for the corev CLI tool.
  *
- * The corev CLI tool is a minimal command line interface designed for managing versioned
+ * The Corev CLI is a minimal command line interface designed for managing versioned
  * configuration files across projects and environments. It supports the following operations:
  *
  *  — init: Initialize the CLI with a central API endpoint. This creates a configuration
- *    file (".conorc.json") that stores the API base URL for future commands.
+ *    file (".corevrc.json") that stores the API base URL for future commands.
  *
  *  — pull: Pull the latest configuration for a given project from the remote API and
  *    store it locally.

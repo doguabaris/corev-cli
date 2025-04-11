@@ -63,7 +63,7 @@ All configuration files are expected to follow this structure:
 npx corev init --api http://localhost:3000
 ```
 
-This saves your API endpoint to `configs/.conorc.json`.
+This saves your API endpoint to `configs/.corevrc.json`.
 
 #### 2. Pull latest config for a project:
 

@@ -6,7 +6,7 @@
  * It includes utilities to handle file paths, parse configuration file names (which must follow
  * the format `<project>@<version>.json`), and read/write configuration data. Additionally, it
  * provides functions to save and retrieve the API base URL from a local configuration file
- * (".conorc.json"), which is used by other CLI commands.
+ * (".corevrc.json"), which is used by other CLI commands.
  *
  * The available functions include:
  *   — getConfigPath: Constructs the full file path for a project's configuration version.
@@ -25,7 +25,7 @@ import fs from 'fs';
 import path from 'path';
 
 const CONFIG_DIR = path.resolve('configs');
-const RC_PATH = path.join(CONFIG_DIR, '.conorc.json');
+const RC_PATH = path.join(CONFIG_DIR, '.corevrc.json');
 
 /**
  * Constructs the file path for a given project and configuration version.
@@ -86,7 +86,7 @@ export function saveConfig(project: string, version: string, config: object): vo
 }
 
 /**
- * Saves the provided API base URL to the local configuration file (.conorc.json).
+ * Saves the provided API base URL to the local configuration file (.corevrc.json).
  *
  * @param api - The API base URL to save.
  */
@@ -98,13 +98,13 @@ export function saveApiBase(api: string): void {
 }
 
 /**
- * Retrieves the API base URL from the local configuration file (.conorc.json).
+ * Retrieves the API base URL from the local configuration file (.corevrc.json).
  *
  * @returns The API base URL.
  * @throws If the configuration file does not exist, or the API base URL is not set.
  */
 export function getApiBase(): string {
-	const RC_PATH = path.join(CONFIG_DIR, '.conorc.json');
+	const RC_PATH = path.join(CONFIG_DIR, '.corevrc.json');
 
 	if (fs.existsSync(RC_PATH)) {
 		const data = JSON.parse(fs.readFileSync(RC_PATH, 'utf-8'));

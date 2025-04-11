@@ -3,7 +3,7 @@
  * @description Implements the “init” command for the corev CLI tool.
  *
  * The "init" command initializes the CLI by setting the API base URL, which is saved
- * to a local configuration file (.conorc.json). This configuration is then used by
+ * to a local configuration file (.corevrc.json). This configuration is then used by
  * other commands (pull, push, diff, list) to interact with the remote configuration API.
  *
  * Usage:

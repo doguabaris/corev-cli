@@ -11,7 +11,7 @@
  *   "config": { ... }
  * }
  *
- * The API base URL is get from a local configuration file (.conorc.json), which is
+ * The API base URL is get from a local configuration file (.corevrc.json), which is
  * created via the “init” command.
  *
  * Usage:
