@@ -1,3 +1,7 @@
+![Image](https://github.com/user-attachments/assets/6ee98eda-e25b-464c-9176-1a398c4216c3)
+
+---
+
 # Corev-CLI
 
 A minimal CLI tool for managing versioned configuration repositories. Built to pull, push, diff, and list config files across distributed environments. Ideal for systems where settings must be easily maintainable, versioned, and auditable.
