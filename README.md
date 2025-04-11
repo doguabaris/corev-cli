@@ -20,7 +20,7 @@ settings need to be easily manageable, versioned, and traceable.
 ### Installation
 
 ```bash
-npm install -g cono
+npm i -g @abaris/cono
 ```
 
 ---
