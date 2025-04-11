@@ -22,7 +22,7 @@ A minimal CLI tool for managing versioned configuration repositories. Built to p
 ### Installation
 
 ```bash
-npm i -g @abaris/corev
+npm i -g @corev/cli
 ```
 
 ---
