@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 /**
  * @file index.ts
- * @description Entry point for the cfgctl CLI tool.
+ * @description Entry point for the cono CLI tool.
  *
- * The cfgctl CLI tool is a minimal command line interface designed for managing versioned
+ * The cono CLI tool is a minimal command line interface designed for managing versioned
  * configuration files across projects and environments. It supports the following operations:
  *
  *  — init: Initialize the CLI with a central API endpoint. This creates a configuration
- *    file (".cfgctlrc.json") that stores the API base URL for future commands.
+ *    file (".conorc.json") that stores the API base URL for future commands.
  *
  *  — pull: Pull the latest configuration for a given project from the remote API and
  *    store it locally.
@@ -23,23 +23,23 @@
  *
  * @example
  *   // Initialize the CLI with an API endpoint:
- *   cfgctl init --api http://localhost:3000
+ *   cono init --api http://localhost:3000
  *
  *   // Pull the latest configuration for a project:
- *   cfgctl pull codex
+ *   cono pull codex
  *
  *   // Push a local configuration file:
- *   cfgctl push configs/codex@1.0.0.json
+ *   cono push configs/codex@1.0.0.json
  *
  *   // Show differences between two configuration files:
- *   cfgctl diff configs/codex@1.0.0.json configs/codex@1.0.1.json
+ *   cono diff configs/codex@1.0.0.json configs/codex@1.0.1.json
  *
  *   // List all local configuration versions:
- *   cfgctl list
+ *   cono list
  *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT
- * @see			README.md for more details on using cfgctl.
+ * @see			README.md for more details on using cono.
  */
 
 import {Command} from 'commander';
@@ -52,7 +52,7 @@ import init from './commands/init';
 const program = new Command();
 
 program
-	.name('cfgctl')
+	.name('cono')
 	.description('CLI for managing versioned configuration files across projects and environments');
 
 program.addCommand(pull);

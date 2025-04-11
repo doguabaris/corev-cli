@@ -1,6 +1,6 @@
 /**
  * @file list.ts
- * @description Implements the “list” command for the cfgctl CLI tool.
+ * @description Implements the “list” command for the cono CLI tool.
  *
  * The “list” command scans the local configuration storage directory ("configs/")
  * for JSON files that follow the naming convention:
@@ -12,12 +12,12 @@
  * indicates that the configuration for project “atlas” is at a version "1.0.0".
  *
  * Usage:
- *   cfgctl list
+ *   cono list
  *
  * The command outputs a colorized list using chalk to improve readability.
  *
  * @example
- *   $ cfgctl list
+ *   $ cono list
  *
  *   atlas:
  *     — 1.0.0
@@ -25,7 +25,7 @@
  *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT
- * @see			README.md for more details on using cfgctl.
+ * @see			README.md for more details on using cono.
  */
 
 import fs from 'fs';

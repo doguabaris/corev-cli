@@ -1,6 +1,6 @@
 /**
  * @file pull.ts
- * @description Implements the “pull” command for the cfgctl CLI tool.
+ * @description Implements the “pull” command for the cono CLI tool.
  *
  * The “pull” command retrieves the latest configuration for a specified project from
  * the remote API and saves it locally under the "configs/" directory. The remote API is
@@ -11,21 +11,21 @@
  *   "config": { ... }
  * }
  *
- * The API base URL is get from a local configuration file (.cfgctlrc.json), which is
+ * The API base URL is get from a local configuration file (.conorc.json), which is
  * created via the “init” command.
  *
  * Usage:
- *   cfgctl pull <project>
+ *   cono pull <project>
  *
  * Example:
- *   cfgctl pull atlas
+ *   cono pull atlas
  *
  * Upon success, the configuration is saved as:
  *   configs/<project>@<version>.json
  *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT
- * @see			README.md for more details on using cfgctl.
+ * @see			README.md for more details on using cono.
  */
 
 import axios from 'axios';

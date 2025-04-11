@@ -1,4 +1,4 @@
-# CFGCTL-CLI
+# Cono-CLI
 
 A minimal CLI tool to **pull, push, diff, and list configuration files** for projects and
 distributed environments. Designed for managing configurations across a variety of domains where
@@ -20,7 +20,7 @@ settings need to be easily manageable, versioned, and traceable.
 ### Installation
 
 ```bash
-npm install -g cfgctl
+npm install -g cono
 ```
 
 ---
@@ -62,39 +62,39 @@ All configuration files are expected to follow this structure:
 #### 1. Initialize once:
 
 ```bash
-npx cfgctl init --api http://localhost:3000
+npx cono init --api http://localhost:3000
 ```
 
-This saves your API endpoint to `configs/.cfgctlrc.json`.
+This saves your API endpoint to `configs/.conorc.json`.
 
 #### 2. Pull latest config for a project:
 
 ```bash
-npx cfgctl pull <project>
+npx cono pull <project>
 ```
 
 Example:
 
 ```bash
-npx cfgctl pull atlas
+npx cono pull atlas
 ```
 
 #### 3. Push local config file:
 
 ```bash
-npx cfgctl push configs/atlas@1.0.1.json
+npx cono push configs/atlas@1.0.1.json
 ```
 
 #### 4. Diff two config files:
 
 ```bash
-npx cfgctl diff configs/atlas@1.0.0.json configs/atlas@1.0.1.json
+npx cono diff configs/atlas@1.0.0.json configs/atlas@1.0.1.json
 ```
 
 #### 5. List versions (based on filenames):
 
 ```bash
-npx cfgctl list
+npx cono list
 ```
 
 ---

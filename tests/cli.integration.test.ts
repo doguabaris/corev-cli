@@ -1,14 +1,14 @@
 /**
  * @file cli.integration.test.ts
- * @description Integration tests for the cfgctl CLI tool.
+ * @description Integration tests for the cono CLI tool.
  *
- * This file contains integration tests for cfgctl, a command line tool for managing
+ * This file contains integration tests for cono, a command line tool for managing
  * versioned configuration files across projects and environments. The tests verify that:
  *
- *  — The “init” command correctly creates the local configuration file (.cfgctlrc.json)
+ *  — The “init” command correctly creates the local configuration file (.conorc.json)
  *    with the API base URL.
  *  — The “pull” command retrieves the latest configuration from the remote API and saves
- *    it locally in the expected format (e.g., testproj@1.0.0.json).
+ *    it locally in the expected format (e.g., atlas@1.0.0.json).
  *  — The “push” command successfully sends a local configuration file to the remote API.
  *  — The “diff” command outputs the differences between two configuration files.
  *  — The “list” command displays all locally stored configuration versions grouped by project.
@@ -23,7 +23,7 @@
  *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT
- * @see			README.md for more details on using cfgctl.
+ * @see			README.md for more details on using cono.
  */
 
 import {afterAll, beforeAll, describe, expect, it} from 'vitest';
@@ -37,9 +37,9 @@ import http from 'http';
 const exec = promisify(execCb);
 const cliPath = path.resolve('src/index.ts');
 const configDir = path.resolve('configs');
-const rcFile = path.join(configDir, '.cfgctlrc.json');
-const pulledConfig = path.join(configDir, 'testproj@1.0.0.json');
-const pushedConfig = path.join(configDir, 'testproj@1.0.1.json');
+const rcFile = path.join(configDir, '.conorc.json');
+const pulledConfig = path.join(configDir, 'atlas@1.0.0.json');
+const pushedConfig = path.join(configDir, 'atlas@1.0.1.json');
 
 let mockServer: ReturnType<typeof spawn>;
 
@@ -48,7 +48,7 @@ beforeAll(async () => {
 
 	await new Promise<void>((resolve) => {
 		const check = () => {
-			http.get('http://localhost:3000/configs/testproj/latest', () => resolve())
+			http.get('http://localhost:3000/configs/atlas/latest', () => resolve())
 				.on('error', () => setTimeout(check, 100));
 		};
 		check();
@@ -65,8 +65,8 @@ afterAll(() => {
 	});
 });
 
-describe('cfgctl CLI integration', () => {
-	it('should init and create .cfgctlrc.json', async () => {
+describe('cono CLI integration', () => {
+	it('should init and create .conorc.json', async () => {
 		const {stdout, stderr} = await exec(`ts-node ${cliPath} init --api http://localhost:3000`);
 		const combined = stripAnsi(stdout + stderr);
 		expect(combined).toContain('API base URL saved as:');
@@ -74,46 +74,54 @@ describe('cfgctl CLI integration', () => {
 	});
 
 	it('should pull config and create file', async () => {
-		const {stdout, stderr} = await exec(`ts-node ${cliPath} pull testproj`);
+		const {stdout, stderr} = await exec(`ts-node ${cliPath} pull atlas`);
 		const combined = stripAnsi(stdout + stderr);
-		expect(combined).toContain('Config saved for testproj');
+		expect(combined).toContain('Config saved for atlas');
 		expect(fs.existsSync(pulledConfig)).toBe(true);
 
 		const content = JSON.parse(fs.readFileSync(pulledConfig, 'utf-8'));
-		expect(content.detector).toBe('TESTPROJ');
+		expect(content.config.foo).toBe('bar');
 	});
 
 	it('should push local config to API', async () => {
 		const payload = {
 			version: '1.0.1',
 			config: {
-				detector: 'TESTPROJ',
-				trigger_threshold: 0.95,
-				compression: 'lz4'
+				foo: 'bar'
 			}
 		};
 		fs.writeFileSync(pushedConfig, JSON.stringify(payload, null, 2));
 
 		const {stdout, stderr} = await exec(`ts-node ${cliPath} push ${pushedConfig}`);
 		const combined = stripAnsi(stdout + stderr);
-		expect(combined).toContain('Pushed config for testproj');
+		expect(combined).toContain('Pushed config for atlas');
 	});
 
 	it('should show differences between two config files', async () => {
+		const payload = {
+			version: '1.0.1',
+			config: {
+				foo: 'baz'
+			}
+		};
+		fs.writeFileSync(pushedConfig, JSON.stringify(payload, null, 2));
+
 		const {
 			stdout,
 			stderr
 		} = await exec(`ts-node ${cliPath} diff ${pulledConfig} ${pushedConfig}`);
 		const cleaned = stripAnsi(stdout + stderr);
+
 		expect(cleaned).toContain('Differences:');
-		expect(cleaned).toMatch(/trigger_threshold/);
-		expect(cleaned).toMatch(/compression/);
+		expect(cleaned).toMatch(/foo/);
+		expect(cleaned).toMatch(/bar/);
+		expect(cleaned).toMatch(/baz/);
 	});
 
 	it('should list pulled configs', async () => {
 		const {stdout, stderr} = await exec(`ts-node ${cliPath} list`);
 		const cleaned = stripAnsi(stdout + stderr);
-		expect(cleaned).toContain('testproj');
+		expect(cleaned).toContain('atlas');
 		expect(cleaned).toContain('1.0.0');
 		expect(cleaned).toContain('1.0.1');
 	});

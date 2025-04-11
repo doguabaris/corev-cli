@@ -1,12 +1,12 @@
 /**
  * @file configService.ts
- * @description Core service module for cfgctl.
+ * @description Core service module for cono.
  *
- * This module provides helper functions for managing configuration files for the cfgctl CLI tool.
+ * This module provides helper functions for managing configuration files for the cono CLI tool.
  * It includes utilities to handle file paths, parse configuration file names (which must follow
  * the format `<project>@<version>.json`), and read/write configuration data. Additionally, it
  * provides functions to save and retrieve the API base URL from a local configuration file
- * (".cfgctlrc.json"), which is used by other CLI commands.
+ * (".conorc.json"), which is used by other CLI commands.
  *
  * The available functions include:
  *   — getConfigPath: Constructs the full file path for a project's configuration version.
@@ -18,14 +18,14 @@
  *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT
- * @see			README.md for more details on using cfgctl.
+ * @see			README.md for more details on using cono.
  */
 
 import fs from 'fs';
 import path from 'path';
 
 const CONFIG_DIR = path.resolve('configs');
-const RC_PATH = path.join(CONFIG_DIR, '.cfgctlrc.json');
+const RC_PATH = path.join(CONFIG_DIR, '.conorc.json');
 
 /**
  * Constructs the file path for a given project and configuration version.
@@ -86,7 +86,7 @@ export function saveConfig(project: string, version: string, config: object): vo
 }
 
 /**
- * Saves the provided API base URL to the local configuration file (.cfgctlrc.json).
+ * Saves the provided API base URL to the local configuration file (.conorc.json).
  *
  * @param api - The API base URL to save.
  */
@@ -98,13 +98,13 @@ export function saveApiBase(api: string): void {
 }
 
 /**
- * Retrieves the API base URL from the local configuration file (.cfgctlrc.json).
+ * Retrieves the API base URL from the local configuration file (.conorc.json).
  *
  * @returns The API base URL.
  * @throws If the configuration file does not exist, or the API base URL is not set.
  */
 export function getApiBase(): string {
-	const RC_PATH = path.join(CONFIG_DIR, '.cfgctlrc.json');
+	const RC_PATH = path.join(CONFIG_DIR, '.conorc.json');
 
 	if (fs.existsSync(RC_PATH)) {
 		const data = JSON.parse(fs.readFileSync(RC_PATH, 'utf-8'));
@@ -113,5 +113,5 @@ export function getApiBase(): string {
 		}
 	}
 
-	throw new Error('API base URL not set. Please run "cfgctl init --api <url>" first.');
+	throw new Error('API base URL not set. Please run "cono init --api <url>" first.');
 }

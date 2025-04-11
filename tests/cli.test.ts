@@ -1,6 +1,6 @@
 /**
  * @file smoke.test.ts
- * @description A basic smoke test for cfgctl using Vitest.
+ * @description A basic smoke test for cono using Vitest.
  *
  * This test serves as a simple sanity check to ensure that the testing environment is
  * properly configured and that Vitest is functioning as expected. It verifies that basic
@@ -16,12 +16,12 @@
  *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT
- * @see			README.md for more details on using cfgctl.
+ * @see			README.md for more details on using cono.
  */
 
 import {describe, expect, it} from 'vitest';
 
-describe('cfgctl smoke test', () => {
+describe('cono smoke test', () => {
 	it('adds numbers correctly', () => {
 		expect(1 + 1).toBe(2);
 	});

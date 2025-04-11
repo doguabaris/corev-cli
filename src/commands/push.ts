@@ -1,20 +1,20 @@
 /**
  * @file push.ts
- * @description Implements the “push” command for the cfgctl CLI tool.
+ * @description Implements the “push” command for the cono CLI tool.
  *
  * The “push” command sends a local configuration file to a remote API. The configuration file
  * must follow the naming convention: `<project>@<version>.json`. This command reads the
  * specified file, parses it as JSON, and makes a POST request to the remote API endpoint.
  *
  * The remote API endpoint is determined by the API base URL stored in the local configuration
- * file (".cfgctlrc.json"), which is created via the “init” command. The payload sent to the API
+ * file (".conorc.json"), which is created via the “init” command. The payload sent to the API
  * should include the version and configuration data.
  *
  * Usage:
- *   cfgctl push <file>
+ *   cono push <file>
  *
  * Example:
- *   cfgctl push configs/atlas@1.0.0.json
+ *   cono push configs/atlas@1.0.0.json
  *
  * The command expects the file name to be in the format:
  *   <project>@<version>.json
@@ -23,7 +23,7 @@
  *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT
- * @see			README.md for more details on using cfgctl.
+ * @see			README.md for more details on using cono.
  */
 
 import path from 'path';

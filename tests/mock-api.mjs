@@ -1,6 +1,6 @@
 /**
  * @file mock-api.mjs
- * @description A simple Express-based mock API server for testing the cfgctl CLI tool.
+ * @description A simple Express-based mock API server for testing the cono CLI tool.
  *
  * This mock API provides two endpoints:
  *
@@ -34,11 +34,11 @@
  *   Run the server with:
  *     node tests/mock-api.mjs
  *
- * This server is intended for local and integration testing of the cfgctl CLI tool.
+ * This server is intended for local and integration testing of the cono CLI tool.
  *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT
- * @see			README.md for more details on using cfgctl.
+ * @see			README.md for more details on using cono.
  */
 
 import express from 'express';
