@@ -1,17 +1,17 @@
 /**
  * @file diff.ts
- * @description Implements the “diff” command for cono CLI.
+ * @description Implements the “diff” command for corev CLI.
  *
  * The "diff" command compares two configuration JSON files and displays their differences.
  * It supports both files that contain the full configuration object, and those that have a
  * nested “config” property. Differences are output with colorized formatting.
  *
  * Usage example:
- *   cono diff configs/codex@1.0.0.json configs/codex@1.0.1.json
+ *   corev diff configs/codex@1.0.0.json configs/codex@1.0.1.json
  *
  * @author 		Doğu Abaris <abaris@null.net>
  * @license 	MIT
- * @see 		README.md for more details on using cono.
+ * @see 		README.md for more details on using corev.
  */
 
 import fs from 'fs';

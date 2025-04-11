@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
  * @file index.ts
- * @description Entry point for the cono CLI tool.
+ * @description Entry point for the corev CLI tool.
  *
- * The cono CLI tool is a minimal command line interface designed for managing versioned
+ * The corev CLI tool is a minimal command line interface designed for managing versioned
  * configuration files across projects and environments. It supports the following operations:
  *
  *  — init: Initialize the CLI with a central API endpoint. This creates a configuration
@@ -23,23 +23,23 @@
  *
  * @example
  *   // Initialize the CLI with an API endpoint:
- *   cono init --api http://localhost:3000
+ *   corev init --api http://localhost:3000
  *
  *   // Pull the latest configuration for a project:
- *   cono pull codex
+ *   corev pull codex
  *
  *   // Push a local configuration file:
- *   cono push configs/codex@1.0.0.json
+ *   corev push configs/codex@1.0.0.json
  *
  *   // Show differences between two configuration files:
- *   cono diff configs/codex@1.0.0.json configs/codex@1.0.1.json
+ *   corev diff configs/codex@1.0.0.json configs/codex@1.0.1.json
  *
  *   // List all local configuration versions:
- *   cono list
+ *   corev list
  *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT
- * @see			README.md for more details on using cono.
+ * @see			README.md for more details on using corev.
  */
 
 import {Command} from 'commander';
@@ -52,7 +52,7 @@ import init from './commands/init';
 const program = new Command();
 
 program
-	.name('cono')
+	.name('corev')
 	.description('CLI for managing versioned configuration files across projects and environments');
 
 program.addCommand(pull);

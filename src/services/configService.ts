@@ -1,8 +1,8 @@
 /**
  * @file configService.ts
- * @description Core service module for cono.
+ * @description Core service module for corev.
  *
- * This module provides helper functions for managing configuration files for the cono CLI tool.
+ * This module provides helper functions for managing configuration files for the corev CLI tool.
  * It includes utilities to handle file paths, parse configuration file names (which must follow
  * the format `<project>@<version>.json`), and read/write configuration data. Additionally, it
  * provides functions to save and retrieve the API base URL from a local configuration file
@@ -18,7 +18,7 @@
  *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT
- * @see			README.md for more details on using cono.
+ * @see			README.md for more details on using corev.
  */
 
 import fs from 'fs';
@@ -113,5 +113,5 @@ export function getApiBase(): string {
 		}
 	}
 
-	throw new Error('API base URL not set. Please run "cono init --api <url>" first.');
+	throw new Error('API base URL not set. Please run "corev init --api <url>" first.');
 }

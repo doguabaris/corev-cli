@@ -1,8 +1,6 @@
 # Cono-CLI
 
-A minimal CLI tool to **pull, push, diff, and list configuration files** for projects and
-distributed environments. Designed for managing configurations across a variety of domains where
-settings need to be easily manageable, versioned, and traceable.
+A minimal CLI tool for managing versioned configuration repositories. Built to pull, push, diff, and list config files across distributed environments. Ideal for systems where settings must be easily maintainable, versioned, and auditable.
 
 ---
 
@@ -20,7 +18,7 @@ settings need to be easily manageable, versioned, and traceable.
 ### Installation
 
 ```bash
-npm i -g @abaris/cono
+npm i -g @abaris/corev
 ```
 
 ---
@@ -62,7 +60,7 @@ All configuration files are expected to follow this structure:
 #### 1. Initialize once:
 
 ```bash
-npx cono init --api http://localhost:3000
+npx corev init --api http://localhost:3000
 ```
 
 This saves your API endpoint to `configs/.conorc.json`.
@@ -70,31 +68,31 @@ This saves your API endpoint to `configs/.conorc.json`.
 #### 2. Pull latest config for a project:
 
 ```bash
-npx cono pull <project>
+npx corev pull <project>
 ```
 
 Example:
 
 ```bash
-npx cono pull atlas
+npx corev pull atlas
 ```
 
 #### 3. Push local config file:
 
 ```bash
-npx cono push configs/atlas@1.0.1.json
+npx corev push configs/atlas@1.0.1.json
 ```
 
 #### 4. Diff two config files:
 
 ```bash
-npx cono diff configs/atlas@1.0.0.json configs/atlas@1.0.1.json
+npx corev diff configs/atlas@1.0.0.json configs/atlas@1.0.1.json
 ```
 
 #### 5. List versions (based on filenames):
 
 ```bash
-npx cono list
+npx corev list
 ```
 
 ---

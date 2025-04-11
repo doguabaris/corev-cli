@@ -1,8 +1,8 @@
 /**
  * @file cli.integration.test.ts
- * @description Integration tests for the cono CLI tool.
+ * @description Integration tests for the corev CLI tool.
  *
- * This file contains integration tests for cono, a command line tool for managing
+ * This file contains integration tests for corev, a command line tool for managing
  * versioned configuration files across projects and environments. The tests verify that:
  *
  *  — The “init” command correctly creates the local configuration file (.conorc.json)
@@ -23,7 +23,7 @@
  *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT
- * @see			README.md for more details on using cono.
+ * @see			README.md for more details on using corev.
  */
 
 import {afterAll, beforeAll, describe, expect, it} from 'vitest';
@@ -65,7 +65,7 @@ afterAll(() => {
 	});
 });
 
-describe('cono CLI integration', () => {
+describe('corev CLI integration', () => {
 	it('should init and create .conorc.json', async () => {
 		const {stdout, stderr} = await exec(`ts-node ${cliPath} init --api http://localhost:3000`);
 		const combined = stripAnsi(stdout + stderr);

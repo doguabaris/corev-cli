@@ -1,11 +1,11 @@
 {
-	"name": "@abaris/cono",
-	"description": "A minimal CLI tool to version, pull, push, diff, and list configuration files.",
+	"name": "@corev/cli",
+	"description": "A minimal CLI for managing versioned configuration repositories.",
 	"version": "0.1.0",
 	"main": "dist/index.js",
 	"type": "commonjs",
 	"bin": {
-		"cono": "dist/index.js"
+		"corev": "dist/index.js"
 	},
 	"keywords": [
 		"cli",
@@ -22,8 +22,12 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/doguabaris/cono.git"
+		"url": "git+https://github.com/doguabaris/corev-cli-cli.git"
 	},
+	"bugs": {
+		"url": "https://github.com/doguabaris/corev-cli-cli/issues"
+	},
+	"homepage": "https://github.com/doguabaris/corev-cli-cli#readme",
 	"dependencies": {
 		"axios": "^1.8.4",
 		"body-parser": "^2.2.0",

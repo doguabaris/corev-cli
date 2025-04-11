@@ -1,6 +1,6 @@
 /**
  * @file pull.ts
- * @description Implements the “pull” command for the cono CLI tool.
+ * @description Implements the “pull” command for the corev CLI tool.
  *
  * The “pull” command retrieves the latest configuration for a specified project from
  * the remote API and saves it locally under the "configs/" directory. The remote API is
@@ -15,17 +15,17 @@
  * created via the “init” command.
  *
  * Usage:
- *   cono pull <project>
+ *   corev pull <project>
  *
  * Example:
- *   cono pull atlas
+ *   corev pull atlas
  *
  * Upon success, the configuration is saved as:
  *   configs/<project>@<version>.json
  *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT
- * @see			README.md for more details on using cono.
+ * @see			README.md for more details on using corev.
  */
 
 import axios from 'axios';

@@ -1,16 +1,16 @@
 /**
  * @file init.ts
- * @description Implements the “init” command for the cono CLI tool.
+ * @description Implements the “init” command for the corev CLI tool.
  *
  * The "init" command initializes the CLI by setting the API base URL, which is saved
  * to a local configuration file (.conorc.json). This configuration is then used by
  * other commands (pull, push, diff, list) to interact with the remote configuration API.
  *
  * Usage:
- *   cono init --api <url>
+ *   corev init --api <url>
  *
  * Example:
- *   cono init --api http://localhost:3000
+ *   corev init --api http://localhost:3000
  *
  * This command is intended to be run once to configure the CLI. The saved API endpoint
  * is then automatically loaded by subsequent commands, so the user does not need to
@@ -18,7 +18,7 @@
  *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT
- * @see			README.md for more details on using cono.
+ * @see			README.md for more details on using corev.
  */
 
 import {Command} from 'commander';
@@ -29,7 +29,7 @@ const init = new Command('init');
 
 init
 	.requiredOption('--api <url>', 'Set the base URL for the configuration API')
-	.description('Initialize cono CLI by saving the API base URL')
+	.description('Initialize corev CLI by saving the API base URL')
 	.action((options) => {
 		saveApiBase(options.api);
 		console.log(chalk.green(`API base URL saved as: ${options.api}`));

@@ -28,8 +28,8 @@ jobs:
                 with:
                     context: .
                     push: true
-                    tags: ghcr.io/doguabaris/cono:latest
+                    tags: ghcr.io/doguabaris/corev-cli:latest
                     labels: |
-                        org.opencontainers.image.source=https://github.com/doguabaris/cono
+                        org.opencontainers.image.source=https://github.com/doguabaris/corev-cli
                         org.opencontainers.image.description=Minimal CLI to manage config versions
                         org.opencontainers.image.licenses=MIT

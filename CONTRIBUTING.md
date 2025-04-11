@@ -1,13 +1,13 @@
 # Contributing
 
-Thank you for considering contributing to **cono**! Whether you’re fixing bugs, adding features,
+Thank you for considering contributing to **corev**! Whether you’re fixing bugs, adding features,
 improving documentation, or just giving feedback — it’s all welcome.
 
 ## How to Contribute
 
-- Open an [issue](https://github.com/doguabaris/cono/issues) and describe what’s going on.
+- Open an [issue](https://github.com/doguabaris/corev-cli/issues) and describe what’s going on.
 
-- Fork the repo → create a new branch → commit changes → open a PR.  
+- Fork the repo → create a new branch → commit changes → open a PR.
   Keep commits focused and descriptive.
 
 - Typos, clarity, formatting — everything counts. You can edit directly and open a PR.

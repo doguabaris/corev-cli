@@ -1,6 +1,6 @@
 /**
  * @file push.ts
- * @description Implements the “push” command for the cono CLI tool.
+ * @description Implements the “push” command for the corev CLI tool.
  *
  * The “push” command sends a local configuration file to a remote API. The configuration file
  * must follow the naming convention: `<project>@<version>.json`. This command reads the
@@ -11,10 +11,10 @@
  * should include the version and configuration data.
  *
  * Usage:
- *   cono push <file>
+ *   corev push <file>
  *
  * Example:
- *   cono push configs/atlas@1.0.0.json
+ *   corev push configs/atlas@1.0.0.json
  *
  * The command expects the file name to be in the format:
  *   <project>@<version>.json
@@ -23,7 +23,7 @@
  *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT
- * @see			README.md for more details on using cono.
+ * @see			README.md for more details on using corev.
  */
 
 import path from 'path';

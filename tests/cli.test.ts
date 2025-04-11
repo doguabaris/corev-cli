@@ -1,6 +1,6 @@
 /**
  * @file smoke.test.ts
- * @description A basic smoke test for cono using Vitest.
+ * @description A basic smoke test for corev using Vitest.
  *
  * This test serves as a simple sanity check to ensure that the testing environment is
  * properly configured and that Vitest is functioning as expected. It verifies that basic
@@ -16,12 +16,12 @@
  *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT
- * @see			README.md for more details on using cono.
+ * @see			README.md for more details on using corev.
  */
 
 import {describe, expect, it} from 'vitest';
 
-describe('cono smoke test', () => {
+describe('corev smoke test', () => {
 	it('adds numbers correctly', () => {
 		expect(1 + 1).toBe(2);
 	});
