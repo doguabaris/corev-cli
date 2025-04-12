@@ -1,4 +1,4 @@
-<img src="https://github.com/user-attachments/assets/41ffc4db-a3de-4c5f-930b-cfd880df743e" alt="Corev CLI header" width="100%" />
+![Image](https://github.com/user-attachments/assets/b1821770-1263-4a09-b3a1-7d278e9b203b)
 
 # Corev-CLI
 
@@ -19,8 +19,6 @@ A minimal CLI tool for managing versioned configuration repositories. Built to p
 ```bash
 npm i -g @corev/cli
 ```
-
-<img src="https://github.com/user-attachments/assets/805fd64f-9231-4309-a18f-d729e3be897d" alt="Corev CLI header" width="100%" />
 
 ### Filename format
 
@@ -55,7 +53,7 @@ All configuration files are expected to follow this structure:
 #### 1. Initialize once:
 
 ```bash
-npx corev init --api http://localhost:3000
+corev init --api http://localhost:3000
 ```
 
 This saves your API endpoint to `configs/.corevrc.json`.
@@ -63,31 +61,31 @@ This saves your API endpoint to `configs/.corevrc.json`.
 #### 2. Pull latest config for a project:
 
 ```bash
-npx corev pull <project>
+corev pull <project>
 ```
 
 Example:
 
 ```bash
-npx corev pull atlas
+corev pull atlas
 ```
 
 #### 3. Push local config file:
 
 ```bash
-npx corev push configs/atlas@1.0.1.json
+corev push configs/atlas@1.0.1.json
 ```
 
 #### 4. Diff two config files:
 
 ```bash
-npx corev diff configs/atlas@1.0.0.json configs/atlas@1.0.1.json
+corev diff configs/atlas@1.0.0.json configs/atlas@1.0.1.json
 ```
 
 #### 5. List versions (based on filenames):
 
 ```bash
-npx corev list
+corev list
 ```
 
 ### Testing
