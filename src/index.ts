@@ -42,18 +42,27 @@
  * @see			README.md for more details on using corev.
  */
 
+import figlet from 'figlet';
 import {Command} from 'commander';
 import pull from './commands/pull';
 import push from './commands/push';
 import diff from './commands/diff';
 import list from './commands/list';
 import init from './commands/init';
+import path from "path";
+import fs from "fs";
+import chalk from "chalk";
+
+const pkg = JSON.parse(
+	fs.readFileSync(path.resolve(__dirname, '../package.json'), 'utf-8')
+);
 
 const program = new Command();
 
 program
 	.name('corev')
-	.description('CLI for managing versioned configuration files across projects and environments');
+	.description('CLI for managing versioned configuration files across projects and environments')
+	.version(pkg.version, '-v, --version', 'Display CLI version');
 
 program.addCommand(pull);
 program.addCommand(push);
@@ -62,8 +71,10 @@ program.addCommand(list);
 program.addCommand(init);
 
 if (!process.argv.slice(2).length) {
+	const banner = figlet.textSync('COREV', {font: 'Block'});
+	console.log(chalk.hex('#aeffde')(banner));
 	program.outputHelp();
 	process.exit(0);
+} else {
+	program.parse();
 }
-
-program.parse();
