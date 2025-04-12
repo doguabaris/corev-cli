@@ -1,4 +1,4 @@
-![Image](https://github.com/user-attachments/assets/b1821770-1263-4a09-b3a1-7d278e9b203b)
+![Image](https://github.com/user-attachments/assets/e857b10d-693a-4a57-b843-701848a81718)
 
 # Corev-CLI
 
