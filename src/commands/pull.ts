@@ -31,8 +31,10 @@
 import axios from 'axios';
 import ora from 'ora';
 import chalk from 'chalk';
+import path from 'path';
 import {Command} from 'commander';
 import {getApiBase, saveConfig} from '../services/configService';
+import {validateConfig} from '../services/configValidator';
 
 const pull = new Command('pull');
 
@@ -47,8 +49,18 @@ pull
 			const res = await axios.get(`${api}/configs/${project}/latest`);
 			const {config, version} = res.data;
 
-			saveConfig(project, version, {version, config});
-			spinner.succeed(`Config saved for ${chalk.cyan(project)} version ${chalk.green(version)}`);
+			saveConfig(project, version, { name: project, version, config });
+
+			const filePath = path.resolve(`configs/${project}@${version}.json`);
+			const {valid, errors} = validateConfig(filePath);
+
+			if (!valid) {
+				spinner.warn(`Config pulled but failed schema validation.`);
+				console.warn(chalk.yellow('Validation issues:'));
+				errors?.forEach(err => console.warn(chalk.yellow(`  - ${err}`)));
+			} else {
+				spinner.succeed(`Config saved for ${chalk.cyan(project)} version ${chalk.green(version)}`);
+			}
 		} catch (error: unknown) {
 			spinner.fail('Failed to fetch config.');
 			if (error instanceof Error) {

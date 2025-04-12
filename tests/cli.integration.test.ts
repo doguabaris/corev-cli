@@ -85,6 +85,7 @@ describe('corev CLI integration', () => {
 
 	it('should push local config to API', async () => {
 		const payload = {
+			name: 'atlas',
 			version: '1.0.1',
 			config: {
 				foo: 'bar'
@@ -99,6 +100,7 @@ describe('corev CLI integration', () => {
 
 	it('should show differences between two config files', async () => {
 		const payload = {
+			name: 'atlas',
 			version: '1.0.1',
 			config: {
 				foo: 'baz'

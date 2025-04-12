@@ -10,6 +10,7 @@
  *
  *    Example response for GET /configs/atlas/latest:
  *    {
+ *      "name": "atlas",
  *      "version": "1.0.0",
  *      "config": {
  *        "detector": "ATLAS",
@@ -24,6 +25,7 @@
  *
  *    Example request for POST /configs/atlas:
  *    {
+ *      "name": "atlas",
  *      "version": "1.0.1",
  *      "config": { ... }
  *    }
@@ -43,17 +45,41 @@
 
 import express from 'express';
 import bodyParser from 'body-parser';
+import Ajv from 'ajv';
+import addFormats from 'ajv-formats';
 
 const app = express();
 const port = 3000;
 
 app.use(bodyParser.json());
 
+const configSchema = {
+	type: 'object',
+	properties: {
+		name: { type: 'string' },
+		version: { type: 'string' },
+		config: {
+			type: 'object',
+			additionalProperties: true
+		}
+	},
+	required: ['name', 'version', 'config'],
+	additionalProperties: false
+};
+
+
+const ajv = new Ajv({allErrors: true});
+addFormats(ajv);
+const validate = ajv.compile(configSchema);
+
 app.get('/configs/:project/latest', (req, res) => {
+	const {project} = req.params;
 	res.json({
+		name: project,
 		version: '1.0.0',
 		config: {
-			foo: 'bar'
+			foo: 'bar',
+			enableFeature: true
 		}
 	});
 });
@@ -61,7 +87,18 @@ app.get('/configs/:project/latest', (req, res) => {
 app.post('/configs/:project', (req, res) => {
 	const {project} = req.params;
 	const body = req.body;
-	console.log(`Received config for ${project}:`, body);
+
+	if (!validate(body)) {
+		console.warn(`Invalid config for ${project}`);
+		console.warn(validate.errors);
+		return res.status(400).json({
+			error: 'Invalid config format.',
+			validation: validate.errors
+		});
+	}
+
+	console.log(`Valid config received for ${project}:`);
+	console.dir(body, {depth: null});
 	res.status(200).json({message: `Config for ${project} accepted.`});
 });
 

@@ -40,6 +40,7 @@ All configuration files are expected to follow this structure:
 
 ```json
 {
+	"name": "atlas",
 	"version": "1.0.0",
 	"config": {
 		"key": "value",

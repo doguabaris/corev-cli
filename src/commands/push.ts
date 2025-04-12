@@ -32,6 +32,7 @@ import chalk from 'chalk';
 import ora from 'ora';
 import {Command} from 'commander';
 import {getApiBase, loadConfig, parseFilename} from '../services/configService';
+import { validateConfig } from '../services/configValidator';
 
 const push = new Command('push');
 
@@ -54,6 +55,14 @@ push
 
 			const {project} = parsed;
 			const payload = loadConfig(filepath);
+
+			const { valid, errors } = validateConfig(filepath);
+			if (!valid) {
+				spinner.fail('Schema validation failed.');
+				console.error(chalk.red('Validation errors:'));
+				errors?.forEach(err => console.error(chalk.red(`  - ${err}`)));
+				process.exit(1);
+			}
 
 			const res = await axios.post(`${api}/configs/${project}`, payload);
 
