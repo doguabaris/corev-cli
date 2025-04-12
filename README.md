@@ -4,9 +4,11 @@
 
 A minimal CLI tool for managing versioned configuration repositories. Built to pull, push, diff, and list config files across distributed environments. Ideal for systems where settings must be easily maintainable, versioned, and auditable.
 
----
-### Some stand-out features:
+<a href="https://www.producthunt.com/posts/corev-cli?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-corev&#0045;cli" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=952597&theme=dark&t=1744456537313" alt="Corev&#0045;CLI - A&#0032;CLI&#0032;tool&#0032;for&#0032;versioning&#0032;and&#0032;managing&#0032;config&#0032;files | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 
+---
+
+### Some stand-out features:
 - Initialize CLI with a central API endpoint
 - Pull latest project configuration
 - Push local config files to the server
