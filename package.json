@@ -1,18 +1,33 @@
 {
 	"name": "@corev/cli",
 	"description": "A minimal CLI for managing versioned configuration repositories.",
-	"version": "0.1.0-alpha.4",
+	"version": "0.1.0-alpha.5",
 	"main": "dist/index.js",
 	"type": "commonjs",
 	"bin": {
 		"corev": "dist/index.js"
 	},
 	"keywords": [
+		"corev",
 		"cli",
+		"command-line",
+		"tools",
+		"utility",
 		"config",
 		"configuration",
+		"settings",
+		"config-management",
 		"versioning",
-		"tools"
+		"management",
+		"json",
+		"distributed",
+		"devops",
+		"typescript",
+		"project settings",
+		"environment config",
+		"orchestration",
+		"config manager",
+		"dynamic configuration management"
 	],
 	"author": {
 		"name": "Doğu Abaris",
