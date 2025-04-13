@@ -31,7 +31,7 @@ init
 	.requiredOption('--api <url>', 'Set the base URL for the configuration API')
 	.description('Initialize corev CLI by saving the API base URL')
 	.action((options) => {
-		saveApiBase(options.api);
+		saveApiBase(options.api.trim().toLowerCase());
 		console.log(chalk.green(`API base URL saved as: ${options.api}`));
 	});
 

@@ -5,10 +5,10 @@
 	"publishConfig": {
 		"registry": "https://registry.npmjs.org/"
 	},
-	"main": "dist/index.js",
+	"main": "dist/cli.js",
 	"type": "commonjs",
 	"bin": {
-		"corev": "dist/index.js"
+		"corev": "dist/cli.js"
 	},
 	"engines": {
 		"node": ">=20.18.1"

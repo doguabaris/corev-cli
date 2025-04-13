@@ -25,7 +25,7 @@ import fs from 'fs';
 import path from 'path';
 
 const CONFIG_DIR = path.resolve('configs');
-const RC_PATH = path.join(CONFIG_DIR, '.corevrc.json');
+const RC_PATH = path.resolve('.corevrc.json');
 
 /**
  * Constructs the file path for a given project and configuration version.
@@ -91,9 +91,6 @@ export function saveConfig(project: string, version: string, config: object): vo
  * @param api - The API base URL to save.
  */
 export function saveApiBase(api: string): void {
-	if (!fs.existsSync(CONFIG_DIR)) {
-		fs.mkdirSync(CONFIG_DIR);
-	}
 	fs.writeFileSync(RC_PATH, JSON.stringify({api}, null, 2));
 }
 
@@ -104,11 +101,10 @@ export function saveApiBase(api: string): void {
  * @throws If the configuration file does not exist, or the API base URL is not set.
  */
 export function getApiBase(): string {
-	const RC_PATH = path.join(CONFIG_DIR, '.corevrc.json');
-
 	if (fs.existsSync(RC_PATH)) {
 		const data = JSON.parse(fs.readFileSync(RC_PATH, 'utf-8'));
 		if (data.api) {
+			console.log(data.api);
 			return data.api;
 		}
 	}

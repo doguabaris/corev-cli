@@ -35,7 +35,7 @@ import fs from 'fs';
 import http from 'http';
 
 const execFile = promisify(execFileCb);
-const cliPath = path.resolve('src/index.ts');
+const cliPath = path.resolve('src/cli.ts');
 const configDir = path.resolve('configs');
 const rcFile = path.join(configDir, '.corevrc.json');
 const pulledConfig = path.join(configDir, 'atlas@1.0.0.json');
@@ -63,6 +63,10 @@ afterAll(() => {
 	[pulledConfig, pushedConfig, rcFile].forEach((f) => {
 		if (fs.existsSync(f)) fs.unlinkSync(f);
 	});
+	const rootRC = path.resolve('.corevrc.json');
+	if (fs.existsSync(rootRC)) {
+		fs.unlinkSync(rootRC);
+	}
 });
 
 describe('corev CLI integration', () => {

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * @file index.ts
+ * @file cli.ts
  * @description Entry point for the corev CLI tool.
  *
  * The Corev CLI is a minimal command line interface designed for managing versioned
