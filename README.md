@@ -42,8 +42,8 @@ partial interface ConfigService {
 ### § 2 The `uploadConfig()` method
 
 Belongs to the **Corev ConfigService conformance class**.  
-Expects two arguments:  
-1. `projectName` — a DOMString specifying the project.  
+Expects two arguments:
+1. `projectName` — a DOMString specifying the project.
 2. `config` — a `Configuration` object to be stored or updated.
 
 ```webidl
@@ -187,8 +187,6 @@ Then run CLI commands while targeting `http://localhost:3000`.
 Below is an Advanced API Specification section that includes both an introduction and a detailed WebIDL contract along with the corresponding HTTP Mapping. This section is intended as a formal guideline for API providers to develop endpoints compliant with Corev-CLI.
 
 
-
-
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
@@ -196,6 +194,3 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 ## License
 
 This package is licensed under the [MIT License](LICENSE).
-
-
-
