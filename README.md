@@ -20,6 +20,8 @@ A minimal CLI tool for managing versioned configuration repositories. Built to p
 npm i -g @corev/cli
 ```
 
+Below is an Advanced API Specification section that includes both an introduction and a detailed WebIDL contract along with the corresponding HTTP Mapping. This section is intended as a formal guideline for API providers to develop endpoints compliant with Corev-CLI.
+
 ## API specification
 
 This section defines the contract that an API endpoint must implement to be compliant with Corev-CLI. The specification is divided into two main parts: the methods (belonging to the `ConfigService` interface) and the dictionaries (`Configuration` and `UploadResponse`).
@@ -183,9 +185,6 @@ node tests/mock-api.mjs
 ```
 
 Then run CLI commands while targeting `http://localhost:3000`.
-
-Below is an Advanced API Specification section that includes both an introduction and a detailed WebIDL contract along with the corresponding HTTP Mapping. This section is intended as a formal guideline for API providers to develop endpoints compliant with Corev-CLI.
-
 
 ## Contributing
 
