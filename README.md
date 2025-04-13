@@ -6,21 +6,68 @@ A minimal CLI tool for managing versioned configuration repositories. Built to p
 
 [![Product Hunt](https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=952597&theme=dark)](https://www.producthunt.com/posts/corev-cli?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-corev-cli)
 
-### Some stand-out features:
-- Initialize CLI with a central API endpoint
-- Pull latest project configuration
-- Push local config files to the server
-- Diff between config versions
-- List available config versions
-- Caches configuration files under `configs/`
+## Prerequisites
 
-### Installation
+> Corev-CLI is not a "plug-and-play" package. It only works if there’s an API that follows the [API specification](#api-specification).  
+It uses this API to `pull` and `push` config files. Without it, the CLI does nothing.
+
+## Installation
 
 ```bash
 npm i -g @corev/cli
 ```
 
-Below is an Advanced API Specification section that includes both an introduction and a detailed WebIDL contract along with the corresponding HTTP Mapping. This section is intended as a formal guideline for API providers to develop endpoints compliant with Corev-CLI.
+## Available commands
+
+Corev-CLI provides a small set of core commands to help you get things done. Files are stored in the `configs/` folder for quick and offline access.
+
+| Action              | Description                                           |
+|---------------------|-------------------------------------------------------|
+| `init`              | Set the API endpoint used by the CLI                  |
+| `pull`              | Fetch the latest config for a project                 |
+| `push`              | Upload a local config file to the server              |
+| `diff`              | Show differences between two config versions          |
+| `list`              | List all available config versions by filename        |
+
+## Quick start
+
+### 1. Initialize once:
+
+```bash
+corev init --api http://localhost:3000
+```
+
+This saves your API endpoint to `configs/.corevrc.json`.
+
+### 2. Pull latest config for a project:
+
+```bash
+corev pull <project>
+```
+
+Example:
+
+```bash
+corev pull atlas
+```
+
+### 3. Push local config file:
+
+```bash
+corev push configs/atlas@1.0.1.json
+```
+
+### 4. Diff two config files:
+
+```bash
+corev diff configs/atlas@1.0.0.json configs/atlas@1.0.1.json
+```
+
+### 5. List versions (based on filenames):
+
+```bash
+corev list
+```
 
 ## API specification
 
@@ -110,21 +157,21 @@ Every configuration file must conform to the JSON schema below, which precisely 
 
 ```json
 {
-  "type": "object",
-  "properties": {
-    "name": {
-      "type": "string"
-    },
-    "version": {
-      "type": "string"
-    },
-    "config": {
-      "type": "object",
-      "additionalProperties": true
-    }
-  },
-  "required": ["name", "version", "config"],
-  "additionalProperties": false
+	"type": "object",
+	"properties": {
+		"name": {
+			"type": "string"
+		},
+		"version": {
+			"type": "string"
+		},
+		"config": {
+			"type": "object",
+			"additionalProperties": true
+		}
+	},
+	"required": ["name", "version", "config"],
+	"additionalProperties": false
 }
 ```
 
@@ -135,48 +182,7 @@ Every configuration file must conform to the JSON schema below, which precisely 
 | GET         | `/configs/:project/latest`       | `ConfigService.getLatestConfig(projectName)`       | `Configuration` object  |
 | POST        | `/configs/:project`              | `ConfigService.uploadConfig(projectName, config)`  | `UploadResponse` object |
 
-
-### Quick start
-
-#### 1. Initialize once:
-
-```bash
-corev init --api http://localhost:3000
-```
-
-This saves your API endpoint to `configs/.corevrc.json`.
-
-#### 2. Pull latest config for a project:
-
-```bash
-corev pull <project>
-```
-
-Example:
-
-```bash
-corev pull atlas
-```
-
-#### 3. Push local config file:
-
-```bash
-corev push configs/atlas@1.0.1.json
-```
-
-#### 4. Diff two config files:
-
-```bash
-corev diff configs/atlas@1.0.0.json configs/atlas@1.0.1.json
-```
-
-#### 5. List versions (based on filenames):
-
-```bash
-corev list
-```
-
-### Testing
+## Testing
 
 Start the mock API:
 
