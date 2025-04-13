@@ -1,7 +1,7 @@
 {
 	"name": "@corev/cli",
 	"description": "A minimal CLI for managing versioned configuration repositories.",
-	"version": "0.1.0-alpha.9",
+	"version": "0.1.0-alpha.10",
 	"publishConfig": {
 		"registry": "https://registry.npmjs.org/"
 	},
@@ -48,7 +48,7 @@
 	"bugs": {
 		"url": "https://github.com/doguabaris/corev-cli/issues"
 	},
-	"homepage": "https://github.com/doguabaris/corev-cli#readme",
+	"homepage": "https://corev.dev",
 	"dependencies": {
 		"ajv": "^8.17.1",
 		"ajv-formats": "^2.1.1",
