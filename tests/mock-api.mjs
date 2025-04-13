@@ -51,24 +51,32 @@ import addFormats from 'ajv-formats';
 const app = express();
 const port = 3000;
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '100kb'}));
 
 const configSchema = {
 	type: 'object',
 	properties: {
-		name: { type: 'string' },
-		version: { type: 'string' },
+		name: {type: 'string'},
+		version: {type: 'string'},
 		config: {
 			type: 'object',
-			additionalProperties: true
+			additionalProperties: true,
+			maxProperties: 100
 		}
 	},
 	required: ['name', 'version', 'config'],
-	additionalProperties: false
+	additionalProperties: false,
+	maxProperties: 5
 };
 
+const ajv = new Ajv({
+	allErrors: true,
+	code: {
+		es5: true,
+		lines: true
+	}
+});
 
-const ajv = new Ajv({allErrors: true});
 addFormats(ajv);
 const validate = ajv.compile(configSchema);
 
@@ -88,6 +96,14 @@ app.post('/configs/:project', (req, res) => {
 	const {project} = req.params;
 	const body = req.body;
 
+	if (
+		!body ||
+		typeof body !== 'object' ||
+		Array.isArray(body)
+	) {
+		return res.status(400).json({error: 'Malformed request body.'});
+	}
+
 	if (!validate(body)) {
 		console.warn(`Invalid config for ${project}`);
 		console.warn(validate.errors);
@@ -99,6 +115,7 @@ app.post('/configs/:project', (req, res) => {
 
 	console.log(`Valid config received for ${project}:`);
 	console.dir(body, {depth: null});
+
 	res.status(200).json({message: `Config for ${project} accepted.`});
 });
 

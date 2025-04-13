@@ -28,13 +28,13 @@
 
 import {afterAll, beforeAll, describe, expect, it} from 'vitest';
 import {promisify} from 'util';
-import {exec as execCb, spawn} from 'child_process';
+import {execFile as execFileCb, spawn} from 'child_process';
 import stripAnsi from 'strip-ansi';
 import path from 'path';
 import fs from 'fs';
 import http from 'http';
 
-const exec = promisify(execCb);
+const execFile = promisify(execFileCb);
 const cliPath = path.resolve('src/index.ts');
 const configDir = path.resolve('configs');
 const rcFile = path.join(configDir, '.corevrc.json');
@@ -67,14 +67,17 @@ afterAll(() => {
 
 describe('corev CLI integration', () => {
 	it('should init and create .corevrc.json', async () => {
-		const {stdout, stderr} = await exec(`ts-node ${cliPath} init --api http://localhost:3000`);
+		const {
+			stdout,
+			stderr
+		} = await execFile('ts-node', [cliPath, 'init', '--api', 'http://localhost:3000']);
 		const combined = stripAnsi(stdout + stderr);
 		expect(combined).toContain('API base URL saved as:');
 		expect(fs.existsSync(rcFile)).toBe(true);
 	});
 
 	it('should pull config and create file', async () => {
-		const {stdout, stderr} = await exec(`ts-node ${cliPath} pull atlas`);
+		const {stdout, stderr} = await execFile('ts-node', [cliPath, 'pull', 'atlas']);
 		const combined = stripAnsi(stdout + stderr);
 		expect(combined).toContain('Config saved for atlas');
 		expect(fs.existsSync(pulledConfig)).toBe(true);
@@ -93,7 +96,7 @@ describe('corev CLI integration', () => {
 		};
 		fs.writeFileSync(pushedConfig, JSON.stringify(payload, null, 2));
 
-		const {stdout, stderr} = await exec(`ts-node ${cliPath} push ${pushedConfig}`);
+		const {stdout, stderr} = await execFile('ts-node', [cliPath, 'push', pushedConfig]);
 		const combined = stripAnsi(stdout + stderr);
 		expect(combined).toContain('Pushed config for atlas');
 	});
@@ -111,7 +114,7 @@ describe('corev CLI integration', () => {
 		const {
 			stdout,
 			stderr
-		} = await exec(`ts-node ${cliPath} diff ${pulledConfig} ${pushedConfig}`);
+		} = await execFile('ts-node', [cliPath, 'diff', pulledConfig, pushedConfig]);
 		const cleaned = stripAnsi(stdout + stderr);
 
 		expect(cleaned).toContain('Differences:');
@@ -121,7 +124,7 @@ describe('corev CLI integration', () => {
 	});
 
 	it('should list pulled configs', async () => {
-		const {stdout, stderr} = await exec(`ts-node ${cliPath} list`);
+		const {stdout, stderr} = await execFile('ts-node', [cliPath, 'list']);
 		const cleaned = stripAnsi(stdout + stderr);
 		expect(cleaned).toContain('atlas');
 		expect(cleaned).toContain('1.0.0');
