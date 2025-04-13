@@ -24,37 +24,6 @@ npm i -g @corev/cli
 
 This section defines the contract that an API endpoint must implement to be compliant with Corev-CLI. The specification is divided into two main parts: the methods (belonging to the `ConfigService` interface) and the dictionaries (`Configuration` and `UploadResponse`).
 
-### Filename format
-
-All configuration files must follow this naming convention:
-
-```
-<project>@<version>.json
-```
-
-Example:
-
-```
-configs/atlas@1.0.0.json
-```
-
-### File structure
-
-All configuration files are expected to follow this structure:
-
-```json
-{
-	"name": "atlas",
-	"version": "1.0.0",
-	"config": {
-		"key": "value",
-		"...": "..."
-	}
-}
-```
-
-### WebIDL Contract
-
 ### § 1 The `getLatestConfig()` method
 
 Belongs to the **Corev ConfigService conformance class**.  
@@ -118,6 +87,44 @@ dictionary UploadResponse {
 **Usage notes:**
 - `status` MUST be either `"success"` or `"error"`.
 - `message` MAY be provided to give further context, such as error details or confirmations.
+
+### File naming
+
+All configuration files must follow this naming convention:
+
+```
+<project>@<version>.json
+```
+
+Example:
+
+```
+configs/atlas@1.0.0.json
+```
+
+### JSON schema
+
+Every configuration file must conform to the JSON schema below, which precisely defines the required structure and fields:
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "config": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "required": ["name", "version", "config"],
+  "additionalProperties": false
+}
+```
 
 ### HTTP mapping
 
