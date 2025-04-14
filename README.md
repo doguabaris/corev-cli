@@ -66,7 +66,53 @@ corev list
 
 ## API specification
 
-This section defines the contract that an API endpoint must implement to be compliant with Corev-CLI. The specification is divided into two main parts: the methods (belonging to the `ConfigService` interface) and the dictionaries (`Configuration` and `UploadResponse`).
+### HTTP mapping
+> Implementers SHOULD provide the endpoints listed below so Corev-CLI can perform `pull` and `push` operations correctly.
+
+| HTTP Method | Endpoint URL               | Expected Response       |
+|-------------|----------------------------|-------------------------|
+| GET         | `/configs/:project/latest` | `Configuration` object  |
+| POST        | `/configs/:project`        | `UploadResponse` object |
+
+### File naming
+
+All configuration files SHOULD follow this naming below:
+
+```
+<project>@<version>.json
+```
+
+Example:
+
+```
+configs/atlas@1.0.0.json
+```
+
+### JSON schema
+
+Every configuration file SHOULD conform to the JSON schema below, which precisely defines the required structure and fields:
+
+```json
+{
+	"type": "object",
+	"properties": {
+		"name": {
+			"type": "string"
+		},
+		"version": {
+			"type": "string"
+		},
+		"config": {
+			"type": "object",
+			"additionalProperties": true
+		}
+	},
+	"required": ["name", "version", "config"],
+	"additionalProperties": false
+}
+```
+
+> Sections 1, 2, 3, and 4 below describe a recommended API contract for compatibility with Corev-CLI. The specification is divided into two main parts: the methods (belonging to the `ConfigService` interface) and the dictionaries (`Configuration` and `UploadResponse`).
 
 ### 1 The `getLatestConfig()` method
 
@@ -131,51 +177,6 @@ dictionary UploadResponse {
 **Usage notes:**
 - `status` MUST be either `"success"` or `"error"`.
 - `message` MAY be provided to give further context, such as error details or confirmations.
-
-### File naming
-
-All configuration files must follow this naming convention:
-
-```
-<project>@<version>.json
-```
-
-Example:
-
-```
-configs/atlas@1.0.0.json
-```
-
-### JSON schema
-
-Every configuration file must conform to the JSON schema below, which precisely defines the required structure and fields:
-
-```json
-{
-	"type": "object",
-	"properties": {
-		"name": {
-			"type": "string"
-		},
-		"version": {
-			"type": "string"
-		},
-		"config": {
-			"type": "object",
-			"additionalProperties": true
-		}
-	},
-	"required": ["name", "version", "config"],
-	"additionalProperties": false
-}
-```
-
-### HTTP mapping
-
-| HTTP Method | Endpoint URL                     | WebIDL Method                                      | Expected Response       |
-|-------------|----------------------------------|----------------------------------------------------|-------------------------|
-| GET         | `/configs/:project/latest`       | `ConfigService.getLatestConfig(projectName)`       | `Configuration` object  |
-| POST        | `/configs/:project`              | `ConfigService.uploadConfig(projectName, config)`  | `UploadResponse` object |
 
 ## Testing
 
