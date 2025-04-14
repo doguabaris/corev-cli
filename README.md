@@ -2,7 +2,7 @@
 
 # Corev-CLI
 
-A minimal CLI tool for managing versioned configuration repositories. Built to pull, push, diff, and list config files across distributed environments. Ideal for systems where settings must be easily maintainable, versioned, and auditable.
+A minimal CLI tool for managing versioned configuration repositories — and a proof-of-concept implementation of the [Internet-Draft on JSON-Based Dynamic Configuration Management](https://www.ietf.org/staging/draft-abaris-json-based-dynamic-config-management-00.txt). Built to pull, push, diff, and list config files across distributed environments. Ideal for systems where settings must be easily maintainable, versioned, and auditable.
 
 [![Product Hunt](https://api.producthunt.com/widgets/embed-image/v1/product_review.svg?product_id=1054790&theme=dark)](https://www.producthunt.com/products/corev-cli/reviews)
 
