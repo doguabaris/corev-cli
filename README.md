@@ -68,7 +68,7 @@ corev list
 
 This section defines the contract that an API endpoint must implement to be compliant with Corev-CLI. The specification is divided into two main parts: the methods (belonging to the `ConfigService` interface) and the dictionaries (`Configuration` and `UploadResponse`).
 
-### § 1 The `getLatestConfig()` method
+### 1 The `getLatestConfig()` method
 
 Belongs to the **Corev ConfigService conformance class**.  
 Expects a single argument, `projectName`, which identifies the project. It returns a promise that resolves with a `Configuration` object containing the latest configuration for that project.
@@ -83,7 +83,7 @@ partial interface ConfigService {
 - When this method is invoked, the implementation MUST retrieve the latest configuration from storage (or memory) and return it as a `Configuration` object.
 - If the project is not found, the promise SHOULD reject with an appropriate error.
 
-### § 2 The `uploadConfig()` method
+### 2 The `uploadConfig()` method
 
 Belongs to the **Corev ConfigService conformance class**.  
 Expects two arguments:
@@ -100,7 +100,7 @@ partial interface ConfigService {
 - When this method is invoked, the implementation MUST store or update the configuration for the specified project, then return an `UploadResponse` indicating success or error.
 - If a duplicate or lower version of a configuration is not allowed by policy, this method SHOULD reject with a `409 Conflict`-like error or return an appropriate error response in the `UploadResponse`.
 
-### § 3 The `Configuration` dictionary
+### 3 The `Configuration` dictionary
 
 Represents the structure of a project configuration object.
 
@@ -117,7 +117,7 @@ dictionary Configuration {
 - `version` can be any string representing a version (e.g., "1.0.0", "2025.04.13-alpha", etc.).
 - `config` is an arbitrary JSON-like structure containing key-value pairs relevant to the configuration.
 
-### § 4 The `UploadResponse` dictionary
+### 4 The `UploadResponse` dictionary
 
 Defines the response returned after a successful (or failed) configuration upload.
 
