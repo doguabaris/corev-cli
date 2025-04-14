@@ -9,7 +9,7 @@ A minimal CLI tool for managing versioned configuration repositories. Built to p
 
 ## Prerequisites
 
-> Corev-CLI is not a "plug-and-play" package. It only works if there’s an API that follows the [API specification](#api-specification).  
+> Corev-CLI is not a "plug-and-play" tool. It only works if there’s an API that follows the [API specification](#api-specification).  
 It uses this API to `pull` and `push` config files. Without it, the CLI does nothing.
 
 ## Installation
