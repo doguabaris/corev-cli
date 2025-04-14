@@ -46,12 +46,6 @@ This saves your API endpoint to `configs/.corevrc.json`.
 corev pull <project>
 ```
 
-Example:
-
-```bash
-corev pull atlas
-```
-
 ### 3. Push local config file:
 
 ```bash
