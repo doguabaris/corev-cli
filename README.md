@@ -6,7 +6,6 @@ A minimal, open-source CLI tool for managing dynamic configuration repositories,
 
 [![Product Hunt](https://api.producthunt.com/widgets/embed-image/v1/product_review.svg?product_id=1054790&theme=dark)](https://www.producthunt.com/products/corev-cli/reviews)
 
-
 ## Prerequisites
 
 > Corev-CLI is not a "plug-and-play" tool. It only works if there’s an API that follows the [API specification](#api-specification).  
