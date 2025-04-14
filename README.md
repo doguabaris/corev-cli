@@ -76,7 +76,7 @@ corev list
 
 ### File naming
 
-All configuration files SHOULD follow this naming below:
+All configuration files SHOULD follow the naming convention below:
 
 ```
 <project>@<version>.json
