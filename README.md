@@ -69,10 +69,10 @@ corev list
 ### HTTP mapping
 > Implementers SHOULD provide the endpoints listed below so Corev-CLI can perform `pull` and `push` operations correctly.
 
-| HTTP Method | Endpoint URL               | Expected Response       |
-|-------------|----------------------------|-------------------------|
-| GET         | `/configs/:project/latest` | `Configuration` object  |
-| POST        | `/configs/:project`        | `UploadResponse` object |
+| HTTP Method | Endpoint URL               | Description                            |
+|-------------|----------------------------|----------------------------------------|
+| GET         | `/configs/:project/latest` | Returns the latest configuration       |
+| POST        | `/configs/:project`        | Uploads a new or updated configuration |
 
 ### File naming
 
