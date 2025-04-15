@@ -23,6 +23,7 @@
 
 import fs from 'fs';
 import path from 'path';
+import {Configuration} from "../types";
 
 const CONFIG_DIR = path.resolve('configs');
 const RC_PATH = path.resolve('.corevrc.json');
@@ -77,7 +78,7 @@ export function loadConfig<T = unknown>(filepath: string): T {
  * @param version - The configuration version.
  * @param config - The configuration data to save.
  */
-export function saveConfig(project: string, version: string, config: object): void {
+export function saveConfig(project: string, version: string, config: Configuration): void {
 	if (!fs.existsSync(CONFIG_DIR)) {
 		fs.mkdirSync(CONFIG_DIR);
 	}

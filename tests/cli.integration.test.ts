@@ -33,6 +33,7 @@ import stripAnsi from 'strip-ansi';
 import path from 'path';
 import fs from 'fs';
 import http from 'http';
+import {Configuration} from "../src/types";
 
 const execFile = promisify(execFileCb);
 const cliPath = path.resolve('src/cli.ts');
@@ -86,12 +87,12 @@ describe('corev CLI integration', () => {
 		expect(combined).toContain('Config saved for atlas');
 		expect(fs.existsSync(pulledConfig)).toBe(true);
 
-		const content = JSON.parse(fs.readFileSync(pulledConfig, 'utf-8'));
+		const content = JSON.parse(fs.readFileSync(pulledConfig, 'utf-8')) as Configuration;
 		expect(content.config.foo).toBe('bar');
 	});
 
 	it('should push local config to API', async () => {
-		const payload = {
+		const payload: Configuration = {
 			name: 'atlas',
 			version: '1.0.1',
 			config: {
@@ -106,7 +107,7 @@ describe('corev CLI integration', () => {
 	});
 
 	it('should show differences between two config files', async () => {
-		const payload = {
+		const payload: Configuration = {
 			name: 'atlas',
 			version: '1.0.1',
 			config: {
@@ -133,5 +134,16 @@ describe('corev CLI integration', () => {
 		expect(cleaned).toContain('atlas');
 		expect(cleaned).toContain('1.0.0');
 		expect(cleaned).toContain('1.0.1');
+	});
+
+	it('should revert config for atlas to an older version', async () => {
+		if (!fs.existsSync(pulledConfig)) {
+			throw new Error(`Required file not found: ${pulledConfig}`);
+		}
+
+		const {stdout, stderr} = await execFile('ts-node', [cliPath, 'revert', 'atlas', '1.0.0']);
+		const combinedOutput = stripAnsi(stdout + stderr);
+
+		expect(combinedOutput).toContain('Revert successful for atlas to version 1.0.0');
 	});
 });

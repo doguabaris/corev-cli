@@ -18,6 +18,8 @@
  *
  *  — list: List all available configuration versions stored locally.
  *
+ * 	— revert: Revert a project to a previous config version.
+ *
  * This tool is intended for use in distributed environments, but is general enough
  * to be applied to any scenario requiring efficient versioned configuration management.
  *
@@ -37,6 +39,9 @@
  *   // List all local configuration versions:
  *   corev list
  *
+ *   // Revert the remote configuration for a project to a previous version:
+ *   corev revert atlas 1.0.0
+ *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT
  * @see			README.md for more details on using corev.
@@ -49,6 +54,7 @@ import push from './commands/push';
 import diff from './commands/diff';
 import list from './commands/list';
 import init from './commands/init';
+import revert from './commands/revert';
 import path from "path";
 import fs from "fs";
 import chalk from "chalk";
@@ -69,6 +75,7 @@ program.addCommand(push);
 program.addCommand(diff);
 program.addCommand(list);
 program.addCommand(init);
+program.addCommand(revert)
 
 if (!process.argv.slice(2).length) {
 	const banner = figlet.textSync('COREV', {font: 'Block'});

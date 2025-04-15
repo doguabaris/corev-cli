@@ -21,13 +21,14 @@ npm i -g @corev/cli
 
 Corev-CLI provides a small set of core commands to help you get things done. Files are stored in the `configs/` folder for quick and offline access.
 
-| Action              | Description                                           |
-|---------------------|-------------------------------------------------------|
-| `init`              | Set the API endpoint used by the CLI                  |
-| `pull`              | Fetch the latest config for a project                 |
-| `push`              | Upload a local config file to the server              |
-| `diff`              | Show differences between two config versions          |
-| `list`              | List all available config versions by filename        |
+| Action   | Description                                           |
+|----------|-------------------------------------------------------|
+| `init`   | Set the API endpoint used by the CLI                  |
+| `pull`   | Fetch the latest config for a project                 |
+| `push`   | Upload a local config file to the server              |
+| `diff`   | Show differences between two config versions          |
+| `list`   | List all available config versions by filename        |
+| `revert` | Revert the remote configuration to a previous version |
 
 ## Quick start
 
@@ -61,6 +62,12 @@ corev diff configs/atlas@1.0.0.json configs/atlas@1.0.1.json
 
 ```bash
 corev list
+```
+
+### 6. Revert to an older configuration:
+
+```bash
+corev revert <project> <version>
 ```
 
 ## API specification

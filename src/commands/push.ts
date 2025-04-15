@@ -32,7 +32,8 @@ import chalk from 'chalk';
 import ora from 'ora';
 import {Command} from 'commander';
 import {getApiBase, loadConfig, parseFilename} from '../services/configService';
-import { validateConfig } from '../services/configValidator';
+import {validateConfig} from '../services/configValidator';
+import {Configuration} from "../types";
 
 const push = new Command('push');
 
@@ -54,9 +55,9 @@ push
 			}
 
 			const {project} = parsed;
-			const payload = loadConfig(filepath);
+			const payload = loadConfig(filepath) as Configuration;
 
-			const { valid, errors } = validateConfig(filepath);
+			const {valid, errors} = validateConfig(filepath);
 			if (!valid) {
 				spinner.fail('Schema validation failed.');
 				console.error(chalk.red('Validation errors:'));

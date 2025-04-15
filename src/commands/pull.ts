@@ -35,6 +35,7 @@ import path from 'path';
 import {Command} from 'commander';
 import {getApiBase, saveConfig} from '../services/configService';
 import {validateConfig} from '../services/configValidator';
+import {Configuration} from "../types";
 
 const pull = new Command('pull');
 
@@ -46,10 +47,10 @@ pull
 
 		try {
 			const api = getApiBase();
-			const res = await axios.get(`${api}/configs/${project}/latest`);
+			const res = await axios.get<Configuration>(`${api}/configs/${project}/latest`);
 			const {config, version} = res.data;
 
-			saveConfig(project, version, { name: project, version, config });
+			saveConfig(project, version, {name: project, version, config});
 
 			const filePath = path.resolve(`configs/${project}@${version}.json`);
 			const {valid, errors} = validateConfig(filePath);
