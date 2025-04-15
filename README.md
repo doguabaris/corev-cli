@@ -49,13 +49,13 @@ corev pull <project>
 ### 3. Push local config file:
 
 ```bash
-corev push configs/atlas@1.0.1.json
+corev push configs/<project>@<version>.json
 ```
 
 ### 4. Diff two config files:
 
 ```bash
-corev diff configs/atlas@1.0.0.json configs/atlas@1.0.1.json
+corev diff configs/<project>@<version>.json configs/<project>@<version>.json
 ```
 
 ### 5. List versions (based on filenames):
