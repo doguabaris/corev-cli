@@ -2,13 +2,13 @@
 
 # Corev-CLI
 
-A minimal, open-source CLI tool for managing dynamic configuration repositories, with a focus on JSON files, on a per-project basis — and a proof-of-concept implementation of the [Internet-Draft on JSON-Based Dynamic Configuration Management](https://www.ietf.org/staging/draft-abaris-json-based-dynamic-config-management-00.txt). It is built to pull, push, diff, list, and revert config files across distributed environments, and is ideal for systems where configurations are dynamic and need to be easily maintainable, versioned, and auditable.
+A minimal, open-source CLI tool for managing dynamic configuration repositories, with a focus on JSON files, on a per-project basis — and a proof-of-concept implementation of the [Internet-Draft on JSON-Based Dynamic Configuration Management](https://www.ietf.org/staging/draft-abaris-json-based-dynamic-config-management-00.txt). It is built to pull, push, diff, list, and revert config files across distributed environments, and is ideal for systems where configurations are dynamic and need to be maintainable, versioned, and auditable.
 
 [![Product Hunt](https://api.producthunt.com/widgets/embed-image/v1/product_review.svg?product_id=1054790&theme=dark)](https://www.producthunt.com/products/corev-cli/reviews)
 
 ## Prerequisites
 
-> Corev-CLI is not a "plug-and-play" tool. It only works if there’s an API that follows the [API specification](#api-specification).  
+> Corev-CLI is not a "plug-and-play" tool. It only works if there is an API that follows the [API specification](#api-specification).  
 It uses this API to `pull` and `push` config files. Without it, the CLI does nothing.
 
 ## Installation
@@ -19,7 +19,7 @@ npm i -g @corev/cli
 
 ## Available commands
 
-Corev-CLI provides a small set of core commands to help you get things done. Files are stored in the `configs/` folder for quick and offline access.
+Corev-CLI provides a small set of core commands to help get things done. Configuration files stored in the `configs/` folder for quick and offline access.
 
 | Action   | Description                                           |
 |----------|-------------------------------------------------------|
@@ -38,15 +38,15 @@ Corev-CLI provides a small set of core commands to help you get things done. Fil
 corev init --api http://localhost:3000
 ```
 
-This saves your API endpoint to `configs/.corevrc.json`.
+This saves the API endpoint to `configs/.corevrc.json`.
 
-### 2. Pull latest config for a project:
+### 2. Pull the latest config for a project:
 
 ```bash
 corev pull <project>
 ```
 
-### 3. Push local config file:
+### 3. Push a local config file:
 
 ```bash
 corev push configs/<project>@<version>.json
@@ -58,7 +58,7 @@ corev push configs/<project>@<version>.json
 corev diff configs/<project>@<version>.json configs/<project>@<version>.json
 ```
 
-### 5. List versions (based on filenames):
+### 5. List versions based on filenames
 
 ```bash
 corev list
@@ -118,7 +118,7 @@ Every configuration file SHOULD conform to the JSON schema below, which precisel
 }
 ```
 
-### API contract (Recommended)
+### API contract (recommended)
 > Sections 1, 2, 3, and 4 below describe a recommended API contract for compatibility with Corev-CLI. The specification is divided into two main parts: the methods (belonging to the `ConfigService` interface) and the dictionaries (`Configuration` and `UploadResponse`).
 
 #### 1 The `getLatestConfig()` method
@@ -134,7 +134,7 @@ partial interface ConfigService {
 
 **Behavior:**
 - When this method is invoked, the implementation MUST retrieve the latest configuration from storage (or memory) and return it as a `Configuration` object.
-- If the project is not found, the promise SHOULD reject with an appropriate error.
+- If the project is not found, the promise SHOULD be rejected with an appropriate error.
 
 #### 2 The `uploadConfig()` method
 
@@ -151,7 +151,7 @@ partial interface ConfigService {
 
 **Behavior:**
 - When this method is invoked, the implementation MUST store or update the configuration for the specified project, then return an `UploadResponse` indicating success or error.
-- If a duplicate or lower version of a configuration is not allowed by policy, this method SHOULD reject with a `409 Conflict`-like error or return an appropriate error response in the `UploadResponse`.
+- If policy doesn’t allow a duplicate or earlier version of a configuration, this method SHOULD reject with a `409 Conflict`-like error or return an appropriate error response in the `UploadResponse`.
 
 #### 3 The `Configuration` dictionary
 
@@ -166,8 +166,8 @@ dictionary Configuration {
 ```
 
 **Usage notes:**
-- `name` typically matches the project identifier (e.g., "atlas").
-- `version` can be any string representing a version (e.g., "1.0.0", "2025.04.13-alpha", etc.).
+- `name` typically matches the project identifier (for example, "atlas").
+- `version` can be any string representing a version (for example, "1.0.0," "2025.04.13-alpha,").
 - `config` is an arbitrary JSON-like structure containing key-value pairs relevant to the configuration.
 
 #### 4 The `UploadResponse` dictionary
@@ -201,4 +201,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ## License
 
-This package is licensed under the [MIT License](LICENSE).
+Corev-CLI is released under the [MIT License](LICENSE).
