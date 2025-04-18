@@ -24,9 +24,12 @@ _(no items currently in active implementation)_
 
 ### Up Next
 
-- `corev init`: Prompt to choose hosted or custom API
-- Hosted API auto-sets `https://api.corev.dev`
-- Token input required for hosted usage
+- `corev init`: Prompt to choose API type
+    - **Hosted**: auto-sets `https://api.corev.dev`
+       - Requires token input
+    - **Local**: sets `http://localhost:3000`
+        - Assumes a locally running Node.js API
+    - **Custom**: prompt for custom API URL
 - Save `.corevrc.json` with `api` and `token` values
 
 - Bucket-based project isolation
