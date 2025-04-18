@@ -45,10 +45,6 @@ _(no items currently in active implementation)_
       }
       ```
 
-- JSON schema validation
-    - `corev validate` command
-    - Auto-validate on `push`
-
 - CLI account and identity tools
     - `corev whoami`, `login`, `logout`, token management
 
