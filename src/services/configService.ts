@@ -9,12 +9,12 @@
  * (".corevrc.json"), which is used by other CLI commands.
  *
  * The available functions include:
- *   — getConfigPath: Constructs the full file path for a project's configuration version.
- *   — parseFilename: Extracts the project name and version from a given filename.
- *   — loadConfig: Reads and parses a JSON configuration file.
- *   — saveConfig: Serializes and writes configuration data to a file.
- *   — saveApiBase: Saves the specified API base URL to the local configuration file.
- *   — getApiBase: Retrieves the API base URL from the local configuration file.
+ *   - getConfigPath: Constructs the full file path for a project's configuration version.
+ *   - parseFilename: Extracts the project name and version from a given filename.
+ *   - loadConfig: Reads and parses a JSON configuration file.
+ *   - saveConfig: Serializes and writes configuration data to a file.
+ *   - saveApiBase: Saves the specified API base URL to the local configuration file.
+ *   - getApiBase: Retrieves the API base URL from the local configuration file.
  *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT
