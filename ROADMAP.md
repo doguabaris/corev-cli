@@ -33,7 +33,7 @@ _(no items currently in active implementation)_
     - Intended to work transparently with CLI commands  
 
 - `corev init`: Prompt to choose API type  
-    - **Local**: prompt for a 4 or 5-digit port (e.g. `4912`, `49152`) — required input  
+    - **Local**: prompt for a 4 or 5-digit port (e.g. `4912`, `49152`), required input
         - Ports must be in the range `1024–65535`  
         - Validates that the selected port is not already in use  
         - Sets `http://localhost:<port>`  

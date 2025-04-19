@@ -6,19 +6,19 @@
  * The Corev CLI is a minimal command line interface designed for managing versioned
  * configuration files across projects and environments. It supports the following operations:
  *
- *  — init: Initialize the CLI with a central API endpoint. This creates a configuration
+ *  - init: Initialize the CLI with a central API endpoint. This creates a configuration
  *    file (".corevrc.json") that stores the API base URL for future commands.
  *
- *  — pull: Pull the latest configuration for a given project from the remote API and
+ *  - pull: Pull the latest configuration for a given project from the remote API and
  *    store it locally.
  *
- *  — push: Push a local configuration file to the remote API.
+ *  - push: Push a local configuration file to the remote API.
  *
- *  — diff: Display differences between two configuration files.
+ *  - diff: Display differences between two configuration files.
  *
- *  — list: List all available configuration versions stored locally.
+ *  - list: List all available configuration versions stored locally.
  *
- * 	— revert: Revert a project to a previous config version.
+ * 	- revert: Revert a project to a previous config version.
  *
  * This tool is intended for use in distributed environments, but is general enough
  * to be applied to any scenario requiring efficient versioned configuration management.

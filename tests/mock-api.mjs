@@ -5,8 +5,8 @@
  * This mock API provides two endpoints:
  *
  * 1. GET /configs/:project/latest
- *    — Returns the latest configuration for the specified project.
- *    — The response is a JSON object containing a “version”, and a "config" object.
+ *    - Returns the latest configuration for the specified project.
+ *    - The response is a JSON object containing a “version”, and a "config" object.
  *
  *    Example response for GET /configs/atlas/latest:
  *    {
@@ -20,8 +20,8 @@
  *    }
  *
  * 2. POST /configs/:project
- *    — Accepts a configuration payload for the specified project.
- *    — Logs the received configuration and returns a confirmation message.
+ *    - Accepts a configuration payload for the specified project.
+ *    - Logs the received configuration and returns a confirmation message.
  *
  *    Example request for POST /configs/atlas:
  *    {

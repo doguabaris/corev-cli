@@ -5,13 +5,13 @@
  * This file contains integration tests for corev, a command line tool for managing
  * versioned configuration files across projects and environments. The tests verify that:
  *
- *  — The “init” command correctly creates the local configuration file (.corevrc.json)
+ *  - The “init” command correctly creates the local configuration file (.corevrc.json)
  *    with the API base URL.
- *  — The “pull” command retrieves the latest configuration from the remote API and saves
+ *  - The “pull” command retrieves the latest configuration from the remote API and saves
  *    it locally in the expected format (e.g., atlas@1.0.0.json).
- *  — The “push” command successfully sends a local configuration file to the remote API.
- *  — The “diff” command outputs the differences between two configuration files.
- *  — The “list” command displays all locally stored configuration versions grouped by project.
+ *  - The “push” command successfully sends a local configuration file to the remote API.
+ *  - The “diff” command outputs the differences between two configuration files.
+ *  - The “list” command displays all locally stored configuration versions grouped by project.
  *
  * The tests make use of a mock API server implemented in "tests/mock-api.mjs" to simulate
  * remote responses. The server is started before the tests run and terminated after they

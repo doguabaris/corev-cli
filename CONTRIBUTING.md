@@ -1,7 +1,7 @@
 # Contributing
 
 Thank you for considering contributing to **corev**! Whether you’re fixing bugs, adding features,
-improving documentation, or just giving feedback — it’s all welcome.
+improving documentation, or just giving feedback, it’s all welcome.
 
 ## How to Contribute
 
@@ -10,7 +10,7 @@ improving documentation, or just giving feedback — it’s all welcome.
 - Fork the repo → create a new branch → commit changes → open a PR.
   Keep commits focused and descriptive.
 
-- Typos, clarity, formatting — everything counts. You can edit directly and open a PR.
+- Typos, clarity, formatting, everything counts. You can edit directly and open a PR.
 
 - Before submitting a PR, run local tests and verify expected CLI behavior with the mock API.
 

@@ -8,7 +8,7 @@
  * definitions outlined in the schema (`configSchema.ts`).
  *
  * The available function includes:
- *   — validateConfig: Validates a given JSON file against the schema and returns errors if any.
+ *   - validateConfig: Validates a given JSON file against the schema and returns errors if any.
  *
  * @author      Doğu Abaris <abaris@null.net>
  * @license     MIT

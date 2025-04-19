@@ -20,8 +20,8 @@
  *   $ corev list
  *
  *   atlas:
- *     — 1.0.0
- *     — 1.0.1
+ *     - 1.0.0
+ *     - 1.0.1
  *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT
@@ -66,7 +66,7 @@ list
 		for (const [project, versions] of Object.entries(grouped)) {
 			console.log(chalk.cyan(`\n${project}:`));
 			for (const version of versions.sort()) {
-				console.log(`  — ${chalk.green(version)}`);
+				console.log(`  - ${chalk.green(version)}`);
 			}
 		}
 	});
