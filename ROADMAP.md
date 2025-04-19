@@ -29,7 +29,7 @@ _(no items currently in active implementation)_
         - Ports must be in the range `1024–65535`  
         - Validates that the selected port is not already in use  
         - Sets `http://localhost:<port>`  
-        - Uses a locally running Node.js API endpoint
+        - Uses a locally running Node.js API endpoint (to be developed as part of the local runtime)
     - **Custom**: prompt for custom API endpoint
     - **Hosted**: auto-sets `https://api.corev.dev`
         - Requires token input
