@@ -25,11 +25,14 @@ _(no items currently in active implementation)_
 ### Up Next
 
 - `corev init`: Prompt to choose API type
+    - **Local**: prompt for a 4 or 5-digit port (e.g. `4912`, `49152`) — required input  
+        - Ports must be in the range `1024–65535`  
+        - Validates that the selected port is not already in use  
+        - Sets `http://localhost:<port>`  
+        - Uses a locally running Node.js API endpoint
+    - **Custom**: prompt for custom API endpoint
     - **Hosted**: auto-sets `https://api.corev.dev`
-       - Requires token input
-    - **Local**: sets `http://localhost:3000`
-        - Assumes a locally running Node.js API
-    - **Custom**: prompt for custom API URL
+        - Requires token input
 - Save `.corevrc.json` with `api` and `token` values
 
 - Bucket-based project isolation
