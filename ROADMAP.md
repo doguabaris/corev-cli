@@ -24,16 +24,24 @@ _(no items currently in active implementation)_
 
 ### Up Next
 
-- `corev init`: Prompt to choose API type
+- Local Node.js API runtime  
+    - Minimal local API server for CLI to interact with when using `Local` mode  
+    - Mirrors hosted API endpoints (`/config/pull`, `/config/push`, etc.)  
+    - Reads/writes config files in the working directory  
+    - JSON Schema validation  
+    - Fast startup on any port; returns structured JSON responses  
+    - Intended to work transparently with CLI commands  
+
+- `corev init`: Prompt to choose API type  
     - **Local**: prompt for a 4 or 5-digit port (e.g. `4912`, `49152`) — required input  
         - Ports must be in the range `1024–65535`  
         - Validates that the selected port is not already in use  
         - Sets `http://localhost:<port>`  
-        - Uses a locally running Node.js API endpoint (to be developed as part of the local runtime)
-    - **Custom**: prompt for custom API endpoint
-    - **Hosted**: auto-sets `https://api.corev.dev`
-        - Requires token input
-- Save `.corevrc.json` with `api` and `token` values
+        - Uses a locally running Node.js API endpoint (to be developed as part of the local runtime)  
+    - **Custom**: prompt for custom API endpoint  
+    - **Hosted**: auto-sets `https://api.corev.dev`  
+        - Requires token input  
+- Save `.corevrc.json` with `api` and `token` values  
 
 - Bucket-based project isolation
     - `corev bucket --new`: Create a named bucket
