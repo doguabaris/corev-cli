@@ -15,13 +15,14 @@
  * created via the “init” command.
  *
  * Usage:
- *   corev pull <project>
+ *
+ *		corev pull <project>
  *
  * Example:
- *   corev pull atlas
  *
- * Upon success, the configuration is saved as:
- *   configs/<project>@<version>.json
+ *		corev pull atlas
+ *
+ * Upon success, the configuration is saved as: configs/<project>@<version>.json
  *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT

@@ -12,16 +12,14 @@
  * indicates that the configuration for project “atlas” is at a version "1.0.0".
  *
  * Usage:
- *   corev list
+ *
+ *		corev list
  *
  * The command outputs a colorized list using chalk to improve readability.
  *
- * @example
- *   $ corev list
+ * Example:
  *
- *   atlas:
- *     - 1.0.0
- *     - 1.0.1
+ *		corev list
  *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT

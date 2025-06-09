@@ -7,10 +7,12 @@
  * other commands (pull, push, diff, list) to interact with the remote configuration API.
  *
  * Usage:
- *   corev init --api <url>
+ *
+ *		corev init --api <url>
  *
  * Example:
- *   corev init --api http://localhost:3000
+ *
+ *		corev init --api http://localhost:3000
  *
  * This command is intended to be run once to configure the CLI. The saved API endpoint
  * is then automatically loaded by subsequent commands, so the user does not need to

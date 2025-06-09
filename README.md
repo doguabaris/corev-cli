@@ -21,14 +21,15 @@ npm i -g @corev/cli
 
 Corev-CLI provides a small set of core commands to help get things done. Configuration files stored in the `configs/` folder for quick and offline access.
 
-| Action   | Description                                           |
-|----------|-------------------------------------------------------|
-| `init`   | Set the API endpoint used by the CLI                  |
-| `pull`   | Fetch the latest config for a project                 |
-| `push`   | Upload a local config file to the server              |
-| `diff`   | Show differences between two config versions          |
-| `list`   | List all available config versions by filename        |
-| `revert` | Revert the remote configuration to a previous version |
+| Action     | Description                                                       |
+|------------|-------------------------------------------------------------------|
+| `init`     | Set the API endpoint used by the CLI                              |
+| `pull`     | Fetch the latest config for a project                             |
+| `push`     | Upload a local config file to the server                          |
+| `diff`     | Show differences between two config versions                      |
+| `list`     | List all available config versions by filename                    |
+| `revert`   | Revert the remote configuration to a previous version             |
+| `checkout` | Fetch a specific config version for a project and save it locally |
 
 ## Quick start
 
@@ -70,15 +71,22 @@ corev list
 corev revert <project> <version>
 ```
 
+### 7. Checkout a specific configuration version:
+
+```bash
+corev checkout <project> <version>
+```
+
 ## API specification
 
 ### HTTP mapping
 > Implementers SHOULD provide the endpoints listed below so Corev-CLI can perform `pull` and `push` operations correctly.
 
-| HTTP Method | Endpoint URL               | Description                            |
-|-------------|----------------------------|----------------------------------------|
-| GET         | `/configs/:project/latest` | Returns the latest configuration       |
-| POST        | `/configs/:project`        | Uploads a new or updated configuration |
+| HTTP Method | Endpoint URL                 | Description                                 |
+|-------------|------------------------------|---------------------------------------------|
+| GET         | `/configs/:project/latest`   | Returns the latest configuration            |
+| GET         | `/configs/:project/:version` | Returns a specific configuration by version |
+| POST        | `/configs/:project`          | Uploads a new or updated configuration      |
 
 ### File naming
 
@@ -136,7 +144,26 @@ partial interface ConfigService {
 - When this method is invoked, the implementation MUST retrieve the latest configuration from storage (or memory) and return it as a `Configuration` object.
 - If the project is not found, the promise SHOULD be rejected with an appropriate error.
 
-#### 2 The `uploadConfig()` method
+#### 2 The `getSpecificConfig()` method
+
+Belongs to the **Corev ConfigService conformance class**.
+Expects two arguments:
+
+1. `projectName`, a DOMString specifying the project
+2. `version`, a DOMString specifying the version to retrieve
+
+```webidl
+partial interface ConfigService {
+  Promise<Configuration> getSpecificConfig(DOMString projectName, DOMString version);
+};
+```
+
+**Behavior:**
+
+- When this method is invoked, the implementation MUST retrieve the configuration for the specified project and version from storage (or memory) and return it as a `Configuration` object.
+- If the project or the specific version is not found, the promise SHOULD be rejected with an appropriate error (e.g., HTTP 404).
+
+#### 3 The `uploadConfig()` method
 
 Belongs to the **Corev ConfigService conformance class**.  
 Expects two arguments:
@@ -153,7 +180,7 @@ partial interface ConfigService {
 - When this method is invoked, the implementation MUST store or update the configuration for the specified project, then return an `UploadResponse` indicating success or error.
 - If policy doesn’t allow a duplicate or earlier version of a configuration, this method SHOULD reject with a `409 Conflict`-like error or return an appropriate error response in the `UploadResponse`.
 
-#### 3 The `Configuration` dictionary
+#### 4 The `Configuration` dictionary
 
 Represents the structure of a project configuration object.
 
@@ -170,7 +197,7 @@ dictionary Configuration {
 - `version` can be any string representing a version (for example, "1.0.0," "2025.04.13-alpha,").
 - `config` is an arbitrary JSON-like structure containing key-value pairs relevant to the configuration.
 
-#### 4 The `UploadResponse` dictionary
+#### 5 The `UploadResponse` dictionary
 
 Defines the response returned after a successful (or failed) configuration upload.
 

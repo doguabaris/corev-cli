@@ -6,10 +6,12 @@
  * previous version by re-pushing an older local configuration.
  *
  * Usage:
- *   corev revert <project> <version>
+ *
+ *		corev revert <project> <version>
  *
  * Example:
- *   corev revert atlas 1.0.0
+ *
+ *		corev revert atlas 1.0.0
  *
  * Upon success, the older configuration is re-pushed to the API and becomes the new
  * “latest” configuration for that project.
@@ -19,13 +21,12 @@
  * @see			README.md for more details on using corev.
  */
 
-
 import fs from 'fs';
 import axios from 'axios';
 import chalk from 'chalk';
 import ora from 'ora';
 import {Command} from 'commander';
-import {getApiBase, loadConfig, getConfigPath} from '../services/configService';
+import {getApiBase, getConfigPath, loadConfig} from '../services/configService';
 import {validateConfig} from '../services/configValidator';
 import {Configuration} from '../types';
 import * as readline from "node:readline";

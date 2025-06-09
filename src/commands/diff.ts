@@ -6,8 +6,9 @@
  * It supports both files that contain the full configuration object, and those that have a
  * nested “config” property. Differences are output with colorized formatting.
  *
- * Usage example:
- *   corev diff configs/codex@1.0.0.json configs/codex@1.0.1.json
+ * Example:
+ *
+ *		corev diff configs/codex@1.0.0.json configs/codex@1.0.1.json
  *
  * @author 		Doğu Abaris <abaris@null.net>
  * @license 	MIT

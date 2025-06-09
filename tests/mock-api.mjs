@@ -19,7 +19,19 @@
  *      }
  *    }
  *
- * 2. POST /configs/:project
+ * 2. GET /configs/:project/:version
+ *    - Returns a specific configuration version for the specified project.
+ *    - Simulates different configurations for '1.0.0' and '1.0.1'.
+ *    - Returns 404 for other versions.
+ *
+ *    Example response for GET /configs/atlas/1.0.0:
+ *    {
+ *      "name": "atlas",
+ *      "version": "1.0.0",
+ *      "config": { ... }
+ *    }
+ *
+ * 3. POST /configs/:project
  *    - Accepts a configuration payload for the specified project.
  *    - Logs the received configuration and returns a confirmation message.
  *
@@ -80,6 +92,42 @@ const ajv = new Ajv({
 addFormats(ajv);
 const validate = ajv.compile(configSchema);
 
+const mockConfigurations = {
+	'atlas': {
+		'1.0.0': {
+			name: 'atlas',
+			version: '1.0.0',
+			config: {
+				detector: 'ATLAS',
+				trigger_threshold: 0.75,
+				compression: 'zstd',
+				logging_level: 'info'
+			}
+		},
+		'1.0.1': {
+			name: 'atlas',
+			version: '1.0.1',
+			config: {
+				detector: 'ATLAS',
+				trigger_threshold: 0.80,
+				compression: 'gzip',
+				new_feature_flag: true
+			}
+		},
+		'2.0.0': {
+			name: 'atlas',
+			version: '2.0.0',
+			config: {
+				detector: 'ATLAS_v2',
+				trigger_threshold: 0.90,
+				compression: 'brotli',
+				logging_level: 'debug',
+				experiment_id: 'EXP-A-123'
+			}
+		}
+	},
+};
+
 app.get('/configs/:project/latest', (req, res) => {
 	const {project} = req.params;
 	res.json({
@@ -90,6 +138,23 @@ app.get('/configs/:project/latest', (req, res) => {
 			enableFeature: true
 		}
 	});
+});
+
+app.get('/configs/:project/:version', (req, res) => {
+	const {project, version} = req.params;
+	const projectConfigs = mockConfigurations[project];
+
+	if (!projectConfigs) {
+		return res.status(404).json({message: `Project '${project}' not found.`});
+	}
+
+	const config = projectConfigs[version];
+
+	if (!config) {
+		return res.status(404).json({message: `Config for project '${project}' with version '${version}' not found.`});
+	}
+
+	res.json(config);
 });
 
 app.post('/configs/:project', (req, res) => {

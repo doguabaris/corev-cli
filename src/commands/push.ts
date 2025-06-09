@@ -11,13 +11,14 @@
  * should include the version and configuration data.
  *
  * Usage:
- *   corev push <file>
+ *
+ *		corev push <file>
  *
  * Example:
- *   corev push configs/atlas@1.0.0.json
  *
- * The command expects the file name to be in the format:
- *   <project>@<version>.json
+ *		corev push configs/atlas@1.0.0.json
+ *
+ * The command expects the file name to be in the format: <project>@<version>.json
  *
  * On success, it prints a success message with the project name, and the HTTP status code returned by the API.
  *

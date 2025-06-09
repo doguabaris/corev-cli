@@ -55,6 +55,7 @@ import diff from './commands/diff';
 import list from './commands/list';
 import init from './commands/init';
 import revert from './commands/revert';
+import checkout from './commands/checkout';
 import path from "path";
 import fs from "fs";
 import chalk from "chalk";
@@ -76,6 +77,7 @@ program.addCommand(diff);
 program.addCommand(list);
 program.addCommand(init);
 program.addCommand(revert)
+program.addCommand(checkout)
 
 if (!process.argv.slice(2).length) {
 	const banner = figlet.textSync('COREV', {font: 'Block'});

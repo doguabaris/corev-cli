@@ -12,6 +12,7 @@
  *  - The “push” command successfully sends a local configuration file to the remote API.
  *  - The “diff” command outputs the differences between two configuration files.
  *  - The “list” command displays all locally stored configuration versions grouped by project.
+ *  - The “checkout” command retrieves a specific configuration version from the remote API.
  *
  * The tests make use of a mock API server implemented in "tests/mock-api.mjs" to simulate
  * remote responses. The server is started before the tests run and terminated after they
@@ -38,9 +39,11 @@ import {Configuration} from "../src/types";
 const execFile = promisify(execFileCb);
 const cliPath = path.resolve('src/cli.ts');
 const configDir = path.resolve('configs');
-const rcFile = path.join(configDir, '.corevrc.json');
+const rcFile = path.resolve('.corevrc.json');
 const pulledConfig = path.join(configDir, 'atlas@1.0.0.json');
 const pushedConfig = path.join(configDir, 'atlas@1.0.1.json');
+const checkedOutConfig101 = path.join(configDir, 'atlas@1.0.1.json');
+const nonExistentVersionConfig = path.join(configDir, 'atlas@9.9.9.json');
 
 let mockServer: ReturnType<typeof spawn>;
 
@@ -145,5 +148,39 @@ describe('corev CLI integration', () => {
 		const combinedOutput = stripAnsi(stdout + stderr);
 
 		expect(combinedOutput).toContain('Revert successful for atlas to version 1.0.0');
+	});
+
+	it('should checkout a specific config version (atlas 1.0.1) and create file', async () => {
+		const {stdout, stderr} = await execFile('ts-node', [cliPath, 'checkout', 'atlas', '1.0.1']);
+		const combined = stripAnsi(stdout + stderr);
+
+		expect(combined).toContain('Config checked out for atlas version 1.0.1');
+		expect(fs.existsSync(checkedOutConfig101)).toBe(true);
+
+		const content = JSON.parse(fs.readFileSync(checkedOutConfig101, 'utf-8')) as Configuration;
+		expect(content.name).toBe('atlas');
+		expect(content.version).toBe('1.0.1');
+		expect(content.config.trigger_threshold).toBe(0.80);
+		expect(content.config.compression).toBe('gzip');
+		expect(content.config.new_feature_flag).toBe(true);
+	});
+
+	it('should fail to checkout a non-existent version and report error', async () => {
+		const project = 'atlas';
+		const version = '9.9.9';
+		const expectedErrorMessagePart = `Failed to checkout config for ${project} version ${version}.`;
+
+		try {
+			await execFile('ts-node', [cliPath, 'checkout', project, version]);
+			expect.fail('Checkout of non-existent version should have failed.');
+		} catch (error: unknown) {
+			const err = error as { stdout: string; stderr: string; code: number };
+			const combined = stripAnsi(err.stdout + err.stderr);
+			expect(combined).toContain(expectedErrorMessagePart);
+			expect(combined).toContain(`API Error: Request failed with status code 404`);
+			expect(combined).toContain(`Hint: Version '9.9.9' for project 'atlas' might not exist on the remote server.`);
+			expect(fs.existsSync(nonExistentVersionConfig)).toBe(false);
+			expect(err.code).toBe(1);
+		}
 	});
 });
