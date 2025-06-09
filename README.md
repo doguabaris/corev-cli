@@ -127,7 +127,7 @@ Every configuration file SHOULD conform to the JSON schema below, which precisel
 ```
 
 ### API contract (recommended)
-> Sections 1, 2, 3, and 4 below describe a recommended API contract for compatibility with Corev-CLI. The specification is divided into two main parts: the methods (belonging to the `ConfigService` interface) and the dictionaries (`Configuration` and `UploadResponse`).
+> Sections 1, 2, 3, 4 and 5 below describe a recommended API contract for compatibility with Corev-CLI. The specification is divided into two main parts: the methods (belonging to the `ConfigService` interface) and the dictionaries (`Configuration` and `UploadResponse`).
 
 #### 1 The `getLatestConfig()` method
 
