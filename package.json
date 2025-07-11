@@ -1,7 +1,7 @@
 {
 	"name": "@corev/cli",
 	"description": "A minimal CLI for managing versioned configuration repositories.",
-	"version": "0.1.0-alpha.16",
+	"version": "0.1.0-alpha.17",
 	"publishConfig": {
 		"registry": "https://registry.npmjs.org/"
 	},
