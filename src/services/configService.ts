@@ -23,20 +23,31 @@
 
 import fs from 'fs';
 import path from 'path';
-import {Configuration} from "../types";
+import {Configuration, CorevSettings} from "../types";
 
 const CONFIG_DIR = path.resolve('configs');
 const RC_PATH = path.resolve('.corevrc.json');
 
 /**
- * Constructs the file path for a given project and configuration version.
+ * Constructs the full file path to a versioned configuration JSON file
+ * for a given project and optional environment.
  *
- * @param project - The project name.
- * @param version - The configuration version.
- * @returns The full path of the configuration file.
+ * If an environment is specified, the config file is assumed to be located under:
+ *   configs/<project>/env/<env>/<project>@<version>.json
+ *
+ * Otherwise, it defaults to:
+ *   configs/<project>/<project>@<version>.json
+ *
+ * @param project - The project slug (e.g., "atlas").
+ * @param version - The configuration version string (e.g., "1.0.3").
+ * @param env - (Optional) The environment name (e.g., "staging", “production”).
+ * @returns The full local file path to the config file.
  */
-export function getConfigPath(project: string, version: string): string {
-	return path.join(CONFIG_DIR, `${project}@${version}.json`);
+export function getConfigPath(project: string, version: string, env?: string): string {
+	const baseDir = env
+		? path.join(CONFIG_DIR, project, 'env', env)
+		: path.join(CONFIG_DIR, project);
+	return path.join(baseDir, `${project}@${version}.json`);
 }
 
 /**
@@ -72,17 +83,37 @@ export function loadConfig<T = unknown>(filepath: string): T {
 }
 
 /**
- * Saves a configuration object to a file under the configs directory.
+ * Saves a configuration object to the appropriate location under the "configs/" directory.
  *
- * @param project - The project name.
- * @param version - The configuration version.
- * @param config - The configuration data to save.
+ * If an `env` argument is provided, the configuration is saved to:
+ *   configs/<project>/env/<env>/<project>@<version>.json
+ *
+ * Otherwise, it is saved to the default project directory:
+ *   configs/<project>/<project>@<version>.json
+ *
+ * This ensures that both environment-specific and default (production) configurations
+ * are organized consistently.
+ *
+ * @param project - The project name (e.g., "atlas").
+ * @param version - The configuration version (e.g., "1.0.0").
+ * @param config - The configuration object to save.
+ * @param env - (Optional) The target environment name (e.g., "staging", "dev").
  */
-export function saveConfig(project: string, version: string, config: Configuration): void {
-	if (!fs.existsSync(CONFIG_DIR)) {
-		fs.mkdirSync(CONFIG_DIR);
+export function saveConfig(
+	project: string,
+	version: string,
+	config: Configuration,
+	env?: string
+): void {
+	const baseDir = env
+		? path.join(CONFIG_DIR, project, 'env', env)
+		: path.join(CONFIG_DIR, project);
+
+	if (!fs.existsSync(baseDir)) {
+		fs.mkdirSync(baseDir, {recursive: true});
 	}
-	const filepath = getConfigPath(project, version);
+
+	const filepath = path.join(baseDir, `${project}@${version}.json`);
 	fs.writeFileSync(filepath, JSON.stringify(config, null, 2));
 }
 
@@ -96,6 +127,24 @@ export function saveApiBase(api: string): void {
 }
 
 /**
+ * Saves the provided API token to .corevrc.json, preserving other fields like api.
+ */
+export function saveToken(token: string): void {
+	const existing = loadRc();
+	fs.writeFileSync(RC_PATH, JSON.stringify({...existing, token}, null, 2));
+}
+
+/**
+ * Reads and parses .corevrc.json, or returns an empty object if missing.
+ */
+function loadRc(): Record<string, CorevSettings> {
+	if (fs.existsSync(RC_PATH)) {
+		return JSON.parse(fs.readFileSync(RC_PATH, 'utf-8'));
+	}
+	return {};
+}
+
+/**
  * Retrieves the API base URL from the local configuration file (.corevrc.json).
  *
  * @returns The API base URL.
@@ -105,10 +154,22 @@ export function getApiBase(): string {
 	if (fs.existsSync(RC_PATH)) {
 		const data = JSON.parse(fs.readFileSync(RC_PATH, 'utf-8'));
 		if (data.api) {
-			console.log(data.api);
-			return data.api;
+			return data.api.replace(/\/+$/, '');
 		}
 	}
 
 	throw new Error('API base URL not set. Please run "corev init --api <url>" first.');
+}
+
+/**
+ * Retrieves the API secret token from the local configuration file (.corevrc.json).
+ *
+ * @returns The API token as a string, or null if not set.
+ */
+export function getToken(): string | null {
+	if (fs.existsSync(RC_PATH)) {
+		const data = JSON.parse(fs.readFileSync(RC_PATH, 'utf-8')) as CorevSettings;
+		return data.token || null;
+	}
+	return null;
 }

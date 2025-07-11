@@ -20,6 +20,10 @@
  *
  * 	- revert: Revert a project to a previous config version.
  *
+ *  - checkout: Retrieve a specific configuration version from the remote API
+ *
+ *  - env: Manage per-project environments (e.g., staging, dev, test).
+ *
  * This tool is intended for use in distributed environments, but is general enough
  * to be applied to any scenario requiring efficient versioned configuration management.
  *
@@ -42,9 +46,15 @@
  *   // Revert the remote configuration for a project to a previous version:
  *   corev revert atlas 1.0.0
  *
- * @author		Doğu Abaris <abaris@null.net>
- * @license		MIT
- * @see			README.md for more details on using corev.
+ *   // Checkout a specific configuration version from the API:
+ *   corev checkout atlas 1.0.0
+ *
+ *   // Add a new environment for a project (e.g., staging):
+ *   corev env add staging
+ *
+ *@author		Doğu Abaris <abaris@null.net>
+ *@license		MIT
+ *@see			README.md for more details on using corev.
  */
 
 import figlet from 'figlet';
@@ -56,6 +66,7 @@ import list from './commands/list';
 import init from './commands/init';
 import revert from './commands/revert';
 import checkout from './commands/checkout';
+import env from "./commands/env";
 import path from "path";
 import fs from "fs";
 import chalk from "chalk";
@@ -78,6 +89,7 @@ program.addCommand(list);
 program.addCommand(init);
 program.addCommand(revert)
 program.addCommand(checkout)
+program.addCommand(env)
 
 if (!process.argv.slice(2).length) {
 	const banner = figlet.textSync('COREV', {font: 'Block'});

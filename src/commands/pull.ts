@@ -3,26 +3,29 @@
  * @description Implements the “pull” command for the corev CLI tool.
  *
  * The “pull” command retrieves the latest configuration for a specified project from
- * the remote API and saves it locally under the "configs/" directory. The remote API is
- * expected to return a JSON object in the following format:
+ * the remote API and saves it locally under the "configs/<project>/" directory.
+ * If the `--env` flag is provided, the configuration is saved under:
+ *   configs/<project>/env/<env>/<project>@<version>.json
+ *
+ * The remote API is expected to return a JSON object in the following format:
  *
  * {
+ *   "name": "project",
  *   "version": "x.y.z",
  *   "config": { ... }
  * }
  *
- * The API base URL is get from a local configuration file (.corevrc.json), which is
+ * The API base URL is retrieved from the local configuration file (.corevrc.json),
  * created via the “init” command.
  *
  * Usage:
  *
- *		corev pull <project>
+ *		corev pull <project> [--env <environment>]
  *
  * Example:
  *
  *		corev pull atlas
- *
- * Upon success, the configuration is saved as: configs/<project>@<version>.json
+ *		corev pull atlas --env staging
  *
  * @author		Doğu Abaris <abaris@null.net>
  * @license		MIT
@@ -34,26 +37,41 @@ import ora from 'ora';
 import chalk from 'chalk';
 import path from 'path';
 import {Command} from 'commander';
-import {getApiBase, saveConfig} from '../services/configService';
+import {getApiBase, getToken, saveConfig} from '../services/configService';
 import {validateConfig} from '../services/configValidator';
-import {Configuration} from "../types";
+import {Configuration} from '../types';
 
 const pull = new Command('pull');
 
 pull
 	.arguments('<project>')
-	.description('Pull latest config for a project')
-	.action(async (project: string) => {
-		const spinner = ora(`Fetching config for "${project}"`).start();
+	.option('--env <environment>', 'Specify the environment to pull config into')
+	.description('Pull latest config for a project (optionally for a specific environment)')
+	.action(async (project: string, options: { env?: string }) => {
+		const {env} = options;
+		const spinner = ora(`Fetching config for "${project}"${env ? ` (env: ${env})` : ''}`).start();
 
 		try {
 			const api = getApiBase();
-			const res = await axios.get<Configuration>(`${api}/configs/${project}/latest`);
-			const {config, version} = res.data;
+			const token = getToken();
+			const headers: Record<string, string> = {
+				...(token ? {'x-corev-secret': token} : {}),
+				...(env ? {'x-corev-env': env} : {}),
+			};
 
-			saveConfig(project, version, {name: project, version, config});
+			const res = await axios.get<Configuration>(
+				`${api}/configs/${project}/latest`,
+				{headers}
+			);
 
-			const filePath = path.resolve(`configs/${project}@${version}.json`);
+			const {name, version, config} = res.data;
+
+			saveConfig(project, version, {name, version, config}, env);
+
+			const filePath = env
+				? path.resolve(`configs/${project}/env/${env}/${project}@${version}.json`)
+				: path.resolve(`configs/${project}/${project}@${version}.json`);
+
 			const {valid, errors} = validateConfig(filePath);
 
 			if (!valid) {
@@ -61,7 +79,7 @@ pull
 				console.warn(chalk.yellow('Validation issues:'));
 				errors?.forEach(err => console.warn(chalk.yellow(`  - ${err}`)));
 			} else {
-				spinner.succeed(`Config saved for ${chalk.cyan(project)} version ${chalk.green(version)}`);
+				spinner.succeed(`Config saved for ${chalk.cyan(project)} version ${chalk.green(version)}${env ? ` (env: ${env})` : ''}`);
 			}
 		} catch (error: unknown) {
 			spinner.fail('Failed to fetch config.');

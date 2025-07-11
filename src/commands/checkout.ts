@@ -36,7 +36,7 @@ import ora from 'ora';
 import chalk from 'chalk';
 import path from 'path';
 import {Command} from 'commander';
-import {getApiBase, saveConfig} from '../services/configService';
+import {getApiBase, getToken, saveConfig} from '../services/configService';
 import {validateConfig} from '../services/configValidator';
 import {Configuration} from '../types';
 
@@ -50,7 +50,12 @@ checkout
 
 		try {
 			const api = getApiBase();
-			const res = await axios.get<Configuration>(`${api}/configs/${project}/${version}`);
+			const token = getToken();
+			const headers = token ? {'x-corev-secret': token} : {};
+			const res = await axios.get<Configuration>(
+				`${api}/configs/${project}/${version}`,
+				{headers}
+			);
 			const {name, config, version: fetchedVersion} = res.data;
 
 			if (name !== project || fetchedVersion !== version) {
@@ -59,7 +64,7 @@ checkout
 
 			saveConfig(project, fetchedVersion, {name, version: fetchedVersion, config});
 
-			const filePath = path.resolve(`configs/${project}@${fetchedVersion}.json`);
+			const filePath = path.resolve(`configs/${project}/${project}@${fetchedVersion}.json`);
 			const {valid, errors} = validateConfig(filePath);
 
 			if (!valid) {

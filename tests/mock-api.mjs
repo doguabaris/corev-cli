@@ -93,21 +93,22 @@ addFormats(ajv);
 const validate = ajv.compile(configSchema);
 
 const mockConfigurations = {
-	'atlas': {
+	atlas: {
 		'1.0.0': {
 			name: 'atlas',
 			version: '1.0.0',
 			config: {
+				foo: 'bar',
 				detector: 'ATLAS',
 				trigger_threshold: 0.75,
-				compression: 'zstd',
-				logging_level: 'info'
+				compression: 'zstd'
 			}
 		},
 		'1.0.1': {
 			name: 'atlas',
 			version: '1.0.1',
 			config: {
+				foo: 'baz',
 				detector: 'ATLAS',
 				trigger_threshold: 0.80,
 				compression: 'gzip',
@@ -125,19 +126,18 @@ const mockConfigurations = {
 				experiment_id: 'EXP-A-123'
 			}
 		}
-	},
+	}
 };
 
 app.get('/configs/:project/latest', (req, res) => {
 	const {project} = req.params;
-	res.json({
-		name: project,
-		version: '1.0.0',
-		config: {
-			foo: 'bar',
-			enableFeature: true
-		}
-	});
+	const latest = mockConfigurations[project]?.['1.0.0'];
+
+	if (!latest) {
+		return res.status(404).json({message: `No config found for ${project}`});
+	}
+
+	res.json(latest);
 });
 
 app.get('/configs/:project/:version', (req, res) => {

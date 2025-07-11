@@ -30,3 +30,12 @@ export interface Configuration {
 	/** Configuration data as key-value pairs. */
 	config: Record<string, unknown>;
 }
+
+/** @public */
+/**
+ * The structure of the CLI configuration file (.corevrc.json).
+ */
+export interface CorevSettings {
+	api: string;
+	token?: string;
+}
