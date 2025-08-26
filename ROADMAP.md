@@ -24,40 +24,17 @@ _(no items currently in active implementation)_
 
 ### Up Next
 
-- Local Node.js API runtime  
-    - Minimal local API server for CLI to interact with when using `Local` mode  
-    - Mirrors hosted API endpoints (`/config/pull`, `/config/push`, etc.)  
-    - Reads/writes config files in the working directory  
-    - JSON Schema validation  
-    - Fast startup on any port; returns structured JSON responses  
-    - Intended to work transparently with CLI commands  
+- Corev-host integration and stable release
+    - Publish an OpenAPI specification for core endpoints and headers.
+    - Align CLI requests and error mapping with the host contract.
+    - Standardize status and error codes, and map them to clear CLI messages.
+    - Tag the first stable public release and provide signed artifacts with checksums.
 
-- `corev init`: Prompt to choose API type  
-    - **Local**: prompt for a 4 or 5-digit port (e.g. `4912`, `49152`), required input
-        - Ports must be in the range `1024–65535`  
-        - Validates that the selected port is not already in use  
-        - Sets `http://localhost:<port>`  
-        - Uses a locally running Node.js API endpoint (to be developed as part of the local runtime)  
-    - **Custom**: prompt for custom API endpoint  
-    - **Hosted**: auto-sets `https://api.corev.dev`  
-        - Requires token input  
-- Save `.corevrc.json` with `api` and `token` values  
-
-- Bucket-based project isolation
-    - `corev bucket --new`: Create a named bucket
-    - `corev bucket --list`: List owned buckets
-    - `corev bucket --set <name>`: Persist selected bucket
-    - `corev bucket --delete`: Delete a bucket
-    - Hosted API: config namespacing by bucket
-    - `.corevrc.json` persists selected bucket as `bucket`, e.g.:
-
-      ```json
-      {
-        "api": "https://api.corev.dev",
-        "token": "sk_live_abc123",
-        "bucket": "myproject-some-space"
-      }
-      ```
+- Documentation overhaul
+    - Add task-based guides with runnable examples.
+    - Provide deployment guides for self-hosting and Docker, and include CI usage notes.
+    - Generate an API reference and error catalog from the OpenAPI spec.
+    - Add migration notes from alpha and document deprecation rules.
 
 - CLI account and identity tools
     - `corev whoami`, `login`, `logout`, token management
@@ -70,17 +47,9 @@ _(no items currently in active implementation)_
 ### Under Consideration
 
 - YAML file support (bi-directional: YAML → JSON and JSON → YAML)
-- Encrypted config buckets (hosted)
 - Expiration / lifecycle policies for versioned configs
-- Signed configuration uploads
 - GitHub Actions integration (`corev-action`)
-- CLI plugin API for custom logic
 
 ### Operational Concerns
 
-The `corev-host` service is a planned hosted backend for users who do not wish to deploy their own API.
-
-While the Corev CLI is fully open-source and works with any conformant backend, maintaining a hosted version involves infrastructure, security, and availability concerns that go beyond the CLI itself.
-
-The hosted service is not yet live and will require sustainable support before a public deployment can happen.  
-If you are interested in sponsoring or supporting the hosted infrastructure for Corev, feel free to reach out via GitHub Discussions or email [abaris@null.net](mailto:abaris@null.net).
+This project is developed and maintained by a volunteer. Sponsorships and grants directly support development, documentation, security reviews, and community support. To sponsor Corev or fund specific work items, reach out via GitHub Discussions or email [abaris@null.net](mailto:abaris@null.net). Sponsors can be acknowledged publicly upon request.
