@@ -13,7 +13,8 @@ upstream source of configuration data.
 ## Prerequisites
 
 > Corev-CLI is not a "plug-and-play" tool. It only works if there is an API that follows
-> the [API specification](#api-specification).  
+> the [API specification](#api-specification).
+> You can use your own compatible API, or use corev-host:                                                                                                                                   > https://github.com/doguabaris/corev-host.
 > It uses this API to `pull` and `push` config files. Without it, the CLI does nothing.
 
 ## Installation
